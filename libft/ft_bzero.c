@@ -6,13 +6,13 @@
 /*   By: ach4q <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:01:53 by ach4q             #+#    #+#             */
-/*   Updated: 2024/09/02 18:12:31 by ach4q            ###   ########.fr       */
+/*   Updated: 2024/09/02 18:16:32 by ach4q            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *b, size_t len)
 {
 	ft_memset(b, '\0', len);
 }
