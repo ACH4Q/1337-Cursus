@@ -3,13 +3,11 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MANSRC = $(wildcard *.c)
 
-
 SOURCES = $(MANSRC:.c=.o)
 
-%.o: %.c
-	 
+%.o: %.c 
 	@$(CC) $(CFLAGS) -c $?
-
+	
 all: $(NAME)
 
 $(NAME): $(SOURCES)
