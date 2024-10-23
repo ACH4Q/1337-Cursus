@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ach4q <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 13:54:15 by ach4q             #+#    #+#             */
-/*   Updated: 2024/09/02 17:47:31 by ach4q            ###   ########.fr       */
+/*   Updated: 2024/10/23 10:30:49 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
-	while(s[len])
+	while (s[len])
 	{
 		len++;
 	}
-	return(len);
+	return (len);
 }

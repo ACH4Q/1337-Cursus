@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 08:56:10 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/23 08:56:16 by machaq           ###   ########.fr       */
+/*   Created: 2024/10/23 11:13:02 by machaq            #+#    #+#             */
+/*   Updated: 2024/10/23 15:29:31 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *b, size_t len)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	ft_memset(b, '\0', len);
+	size_t		i;
+	char		*dst_tmp;
+	const char	*src_tmp;
+
+	if (dst == 0 || src == 0)
+		return (dst);
+	if ((src < dst) && (char *)src + n > (char *)dst)
+		return (NULL);
+	dst_tmp = (char *)dst;
+	src_tmp = (const char *)src;
+	i = 0;
+	while (i < n)
+	{
+		dst_tmp[i] = src_tmp[i];
+		i++;
+	}
+	return (dst);
 }
