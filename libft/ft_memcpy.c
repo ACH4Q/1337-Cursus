@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:13:02 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/23 15:29:31 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/23 19:19:50 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	char		*dst_tmp;
 	const char	*src_tmp;
 
-	if (dst == 0 || src == 0)
+	if ((dst == 0) || (src == 0))
 		return (dst);
 	if ((src < dst) && (char *)src + n > (char *)dst)
 		return (NULL);
