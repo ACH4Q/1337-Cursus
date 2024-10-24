@@ -4,7 +4,8 @@
 int main()
 {
     
-    printf("%c",tolower('r'));
-    printf("%c",toupper('u'));
+    printf("%c",ft_toupper('r'));
+    printf("%c",ft_tolower('R'));
+
 
 }
