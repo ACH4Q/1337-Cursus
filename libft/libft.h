@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:57:47 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/24 14:28:24 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/24 17:07:43 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+char    *ft_strchr(const char *s, int c);
 
 #endif
