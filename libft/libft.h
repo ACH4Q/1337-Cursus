@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:57:47 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/24 10:48:29 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/24 11:57:06 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t  ft_strlcat(char *dst, const char *src, size_t dstsize);
 
 #endif
