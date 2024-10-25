@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:43:13 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/24 13:21:49 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/25 03:15:31 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	char	*dst_tmp;
 
 	if (!dst && !src)
-	{
 		return (NULL);
-	}
 	dst_tmp = (char *)dst;
 	src_tmp = (char *)src;
 	i = 0;
