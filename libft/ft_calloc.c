@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 09:29:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/25 09:54:23 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/25 10:10:24 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	*ft_calloc(size_t count, size_t size)
 	char_calloc = malloc(count * size);
 	if (!char_calloc)
 		return (NULL);
-	ft_memset(char_calloc, 0, (count * size));
+	ft_bzero(char_calloc, (count * size));
 	return (char_calloc);
 }
