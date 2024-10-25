@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:57:47 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/25 05:08:54 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/25 08:02:59 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-int		whatoi(const char *str);
+int		ft_atoi(const char *str);
 
 #endif
