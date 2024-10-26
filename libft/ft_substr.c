@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:01:26 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/26 22:33:56 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/26 22:36:14 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_allocated = ft_strlen(s + start);
 	if (!s)
 		return (NULL);
-	if (start > ft_strlen(s))
+	if (start >= ft_strlen(s))
 	{
 		return (ft_strdup(""));
 	}
