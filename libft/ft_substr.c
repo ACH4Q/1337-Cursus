@@ -6,34 +6,28 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:01:26 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/26 22:36:14 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/27 09:42:16 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h>
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
-	size_t	size_allocated;
+	size_t	src_len;
 	char	*str_allocated;
 
-	size_allocated = ft_strlen(s + start);
 	if (!s)
 		return (NULL);
-	if (start >= ft_strlen(s))
-	{
+	src_len = ft_strlen(s);
+	if (start >= src_len)
 		return (ft_strdup(""));
-	}
-	if (len > size_allocated)
-	{
-		len = size_allocated + 1;
-	}
-	str_allocated = malloc(size_allocated);
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	str_allocated = malloc(len + 1);
 	if (!str_allocated)
-	{
 		return (NULL);
-	}
 	i = 0;
 	while (i < len)
 	{
