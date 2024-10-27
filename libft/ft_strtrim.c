@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:40:36 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/27 17:56:14 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/27 17:56:42 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ char	*ft_strtrim(const char *s1, const char *set)
 	while (s1)
 	{
         sadsad
-    }
+    }asdasdas
 }
