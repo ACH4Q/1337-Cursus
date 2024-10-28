@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:40:36 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/28 20:20:11 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/28 20:30:02 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,27 @@ char	*ft_strtrim(const char *s1, const char *set)
 	char	*str_allocated;
 
 	if (!s1 || !set)
-			return (NULL);
+		return (NULL);
 	start = 0;
 	end = ft_strlen(s1);
-	while (start < end && ft_strchr(set,s1[start]))
+	while (start < end && ft_strchr(set, s1[start]))
 	{
 		start++;
 	}
-	while (end > start && ft_strchr(set,s1[end]))
+	while (end > start && ft_strchr(set, s1[end - 1]))
 	{
 		end--;
 	}
-	str_allocated = (char *)(malloc( (end - start) + 1));
+	str_allocated = (char *)(malloc((end - start) + 1));
 	if (!str_allocated)
 		return (NULL);
-	ft_strlcpy(str_allocated,s1 + start,end - start + 2);
+	ft_strlcpy(str_allocated, s1 + start, end - start + 1);
 	return (str_allocated);
+}
+#include <stdio.h>
+int	main()
+{
+	char *s = "FDFDFDFDFDFDACH4QDFDFDFDFDFDFDDDDD";
+	char *j = "DF";
+	printf("%s",ft_strtrim(s,j));
 }
