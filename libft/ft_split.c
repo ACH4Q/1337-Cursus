@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/28 20:53:41 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/28 21:21:42 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,4 @@ int	ft_strlen(const char *s)
         *s++;
     }
     return (s);
-}
-#include <stdio.h>
-int main()
-{
-    char *name = "imran";
-    printf("%d", ft_strlen(name));
-    return 0;
 }
