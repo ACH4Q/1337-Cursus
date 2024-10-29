@@ -6,13 +6,13 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 04:54:48 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/29 11:59:27 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/29 13:26:18 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
-static int check_over_flowe(const char *str,int n)
+static int check_over_flow(const char *str,int n)
 {
 	size_t size;
 
@@ -49,7 +49,7 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	return (check_over_flowe(str,result*sign));
+	return (check_over_flow(str,result*sign));
 }
 #include <stdio.h>
 int	main()
