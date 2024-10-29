@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/29 19:36:11 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/29 22:17:22 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,3 @@ static  char *str_allocation(char   *s, int start, int end)
     ft_strlcpy(str,s,ft_strlen(s));
     return (str);
 }
-
-
-
