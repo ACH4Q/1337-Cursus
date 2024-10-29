@@ -6,11 +6,23 @@
 /*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 04:54:48 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/27 15:36:56 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/29 11:59:27 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
+static int check_over_flowe(const char *str,int n)
+{
+	size_t size;
+
+	size = strlen(str);
+	if(strchr(str,'-') && size >= 12)
+		return 0;
+	else if(size >= 12)
+		return -1;
+	return n;
+}
 
 int	ft_atoi(const char *str)
 {
@@ -37,5 +49,11 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	return (result * sign);
+	return (check_over_flowe(str,result*sign));
+}
+#include <stdio.h>
+int	main()
+{
+	int i = INT_MAX;
+	printf("%d",ft_atoi("-12315632"));
 }
