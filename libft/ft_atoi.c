@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 04:54:48 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/30 14:05:50 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/30 14:06:24 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,4 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (check_over_flow(str,result*sign));
-}
-#include <stdio.h>
-int	main()
-{
-	int i = INT_MAX;
-	printf("%d",ft_atoi("-12315632"));
 }
