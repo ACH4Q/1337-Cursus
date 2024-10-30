@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/30 13:44:31 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/30 14:04:45 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,38 @@ static size_t	count_word(const char *str, char sep)
 static char	*str_allocation(char *s, int start, int end)
 {
 	char	*str;
-	
+
 	str = (char *)malloc(end - start + 1);
 	if (!*str)
 		return (NULL);
 	ft_strlcpy(str, s + start, end - start + 1);
 	return (str);
 }
-char **ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	int i;
+	int		start;
+	size_t	i;
+	int		word;
 	char	**result;
 
 	i = 0;
 	if (!s)
 		return (NULL);
-	result = malloc(count_word(s,c) + 1);
+	result = malloc(count_word(s, c) + 1);
 	if (!result)
 		return (NULL);
-	while (*s)
+	while (s[i])
 	{
-		if (s[i] != c && )
+		if (s[i] != c && (i == 0 || s[i - 1] == c))
+			start = i;
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+		{
+			result[word++] = word_dup(s, start, i + 1);
+			if (!result[word - 1])
+				return (NULL);
+		}
+		i++;
 	}
+	result[word] = NULL;
+	return (result);
 }
-
