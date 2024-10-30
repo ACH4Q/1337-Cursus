@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:15:40 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/29 17:52:39 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/30 14:09:51 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	allocated_str[i + j] = '\0';
 	return (allocated_str);
-}
-
-int main ()
-{
-	char *ft_str = ft_strjoin(NULL,NULL); 
-
 }
