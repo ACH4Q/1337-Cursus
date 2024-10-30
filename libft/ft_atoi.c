@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 04:54:48 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/30 14:06:24 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/30 14:06:42 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int check_over_flow(const char *str,int n)
 {
 	size_t size;
 
-	size = strlen(str);
+	size = ft_strlen(str);
 	if(ft_strchr(str,'-') && size >= 12)
 		return 0;
 	else if(size >= 12)
