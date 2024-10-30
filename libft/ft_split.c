@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/29 23:06:48 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/30 13:41:22 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,18 @@ static char	*str_allocation(char *s, int start, int end)
 }
 char **ft_split(char const *s, char c)
 {
+	int i;
 	char	**result;
+
+	i = 0;
 	if (!s)
 		return (NULL);
 	result = malloc(count_word(s,c) + 1);
 	if (!result)
 		return (NULL);
-	
+	while (*s)
+	{
+		if (s[i] != c && ())
+	}
 }
+
