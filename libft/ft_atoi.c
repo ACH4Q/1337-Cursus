@@ -6,23 +6,12 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 04:54:48 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/30 14:06:42 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/30 14:11:13 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
-static int check_over_flow(const char *str,int n)
-{
-	size_t size;
-
-	size = ft_strlen(str);
-	if(ft_strchr(str,'-') && size >= 12)
-		return 0;
-	else if(size >= 12)
-		return -1;
-	return n;
-}
 
 int	ft_atoi(const char *str)
 {
@@ -49,5 +38,5 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	return (check_over_flow(str,result*sign));
+	return (result*sign);
 }
