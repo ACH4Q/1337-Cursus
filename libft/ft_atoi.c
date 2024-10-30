@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 04:54:48 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/30 14:11:13 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/30 14:11:58 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	return (result*sign);
+	return (result * sign);
 }

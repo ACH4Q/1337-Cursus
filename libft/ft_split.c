@@ -6,70 +6,90 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/30 14:09:23 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/30 17:12:53 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static size_t	count_word(const char *str, char sep)
+static size_t	count_words(const char *str, char sep)
 {
 	size_t	words;
-	int		i;
+	int		in_word;
 
 	words = 0;
-	i = 0;
+	in_word = 0;
 	while (*str)
 	{
-		if (*str != sep && !i)
+		if (*str != sep && !in_word)
 		{
-			i = 1;
+			in_word = 1;
 			words++;
 		}
 		else if (*str == sep)
 		{
-			i = 0;
+			in_word = 0;
 		}
 		str++;
 	}
 	return (words);
 }
-static char	*str_allocation(char *s1, int start, int end)
+
+static void	*ft_free(char **strs, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		free(strs[i]);
+		i++;
+	}
+	free(strs);
+	return (NULL);
+}
+
+static char	*str_alloc(const char *s, int start, int end)
 {
 	char	*str;
 
-	str = (char *)malloc(end - start + 1);
-	if (!*str)
+	str = (char *)malloc((end - start + 1) * sizeof(char));
+	if (!str)
 		return (NULL);
-	ft_strlcpy(str, s1 + start, end - start + 1);
+	ft_strlcpy(str, s + start, end - start + 1);
 	return (str);
 }
-char	**ft_split(char const *s, char c)
+
+char	**ft_split(const char *s, char sep)
 {
-	int		start;
-	size_t	i;
-	int		word;
-	char	**result;
-	word = 0;
-	start = 0;
-	i = 0;
-	if (!s)
+	size_t	words;
+	if	(!s)
 		return (NULL);
-	result = malloc(count_word(s, c) + 1);
+	words = count_words(s, sep);
+	char **result = (char **)malloc((words + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
+	size_t	i;
+	size_t	word;
+	size_t	start;
+	
+	i = 0;
+	word = 0;
+	start = 0;
 	while (s[i])
 	{
-		if (s[i] != c && (i == 0 || s[i - 1] == c))
+		if (s[i] != sep && (i == 0 || s[i - 1] == sep))
 			start = i;
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+		if (s[i] != sep && (s[i + 1] == sep || s[i + 1] == '\0'))
 		{
-			result[word++] = str_allocation((char *)s, start, i + 1);
-			if (!result[word - 1])
-				return (NULL);
+			result[word] = str_alloc(s, start, i + 1);
+			if (!result[word])
+				return (ft_free(result, word));  
+			word++;
 		}
 		i++;
 	}
-	result[word] = NULL;
+	result[word] = NULL; 
 	return (result);
 }
