@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/30 13:41:22 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/30 13:44:31 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char **ft_split(char const *s, char c)
 		return (NULL);
 	while (*s)
 	{
-		if (s[i] != c && ())
+		if (s[i] != c && )
 	}
 }
 
