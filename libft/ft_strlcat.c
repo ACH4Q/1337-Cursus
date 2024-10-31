@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:50:35 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/26 16:11:30 by machaq           ###   ########.fr       */
+/*   Updated: 2024/10/31 14:03:01 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 
 	src_len = ft_strlen(src);
 	dst_len = ft_strlen(dst);
-	if (dstsize <= dst_len)
+	if (dstsize <= dst_len && !dstsize)
 	{
-		return (src_len + dstsize);
+		return (src_len + dstsize );
 	}
 	else if (src_len < (dstsize - dst_len))
 	{
@@ -33,4 +33,10 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		dst[dstsize - 1] = '\0';
 	}
 	return (src_len + dst_len);
+}
+int	main()
+{
+	char *str;
+	printf("%d",ft_strlcat(NULL,"sdfds",0));
+	
 }
