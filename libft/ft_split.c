@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/01 17:34:38 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/01 17:39:39 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,7 @@ static char	*str_alloc(const char *s, int start, int end)
 	ft_strlcpy(str, s + start, end - start + 1);
 	return (str);
 }
-static char	*fill_str(char *str, char s, size_t words, size_t start, char **result)
-{
-	int	i;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != s && (i == 0 || str[i - 1] == s))
-			start = i;
-		if (str[i] != s && (str[i + 1] == s || str[i + 1] == '\0'))
-		{
-			result[words] = str_alloc(s, start, i + 1);
-			if (!result[words])
-				return (ft_free(result, words));
-			words++;
-		}
-		i++;
-	}
-}
 char	**ft_split(const char *s, char sep)
 {
 	size_t	i;
@@ -95,7 +77,19 @@ char	**ft_split(const char *s, char sep)
 	i = 0;
 	word = 0;
 	start = 0;
-	fill_str(s,sep,word,start,result);
+	while (s[i])
+	{
+		if (s[i] != sep && (i == 0 || s[i - 1] == sep))
+			start = i;
+		if (s[i] != sep && (s[i + 1] == sep || s[i + 1] == '\0'))
+		{
+			result[word] = str_alloc(s, start, i + 1);
+			if (!result[word])
+				return (ft_free(result, word));
+			word++;
+		}
+		i++;
+	}
 	result[word] = NULL;
 	return (result);
 }
