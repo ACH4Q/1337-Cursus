@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:14:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/01 22:16:08 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/01 22:20:29 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,26 @@
 static  int number_len(int n)
 {
     int counter;
+
+    counter = 0;
     if(n < 0)
-        counter -= counter;
+    {
+        counter++;
+        n = -n;
+    }
     if (n == 0)
-        counter = 1;
+        counter++;
     while (n != 0)
     {
-        n /= n;
+        n /= 10;
         counter++;
     }
     return (counter);
 }
+#include <stdio.h>
 int main()
 {
-    number_len(423432);
+    printf("%d",number_len(-4234332));
 }
  /* char    *ft_itoa(int n)
 {
