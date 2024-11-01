@@ -6,7 +6,17 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:14:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/31 14:14:05 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/01 21:57:48 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+static  number_len(int n)
+{
+        
+}
+char    *ft_itoa(int n)
+{
+    
+}
