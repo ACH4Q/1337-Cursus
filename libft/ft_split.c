@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/01 18:35:43 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/01 18:36:20 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*str_alloc(const char *s, int start, int end)
 	return (str);
 }
 
-static int	fill_words(char **result,char sep,char *s)
+static int	fill_words(char **result,char sep,const char *s)
 {
 	size_t	start;
 	size_t	i;
