@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/01 18:27:53 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/01 18:35:43 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ static size_t	count_words(const char *str, char sep)
 	return (words);
 }
 
-static void	*ft_free(char **strs, int count)
+static void	*ft_free(char **str, int count)
 {
 	int	i;
 
 	i = 0;
 	while (i < count)
 	{
-		free(strs[i]);
+		free(str[i]);
 		i++;
 	}
-	free(strs);
+	free(str);
 	return (NULL);
 }
 
@@ -77,12 +77,12 @@ static int	fill_words(char **result,char sep,char *s)
 			{
 				result[word] = str_alloc(s, start, i + 1);
 				if (!result[word])
-					return (ft_free(result, word));
+					return ((int)ft_free(result, word));
 				word++;
 			}
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 char	**ft_split(const char *s, char sep)
@@ -96,7 +96,6 @@ char	**ft_split(const char *s, char sep)
 	result = (char **)malloc((words + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
-	fill_words(result,sep,s);
 		if (!fill_words(result,sep,s))
 			return (NULL);
 	result[words] = NULL;
