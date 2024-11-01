@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/01 18:36:20 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/01 18:36:51 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,26 @@ static char	*str_alloc(const char *s, int start, int end)
 	return (str);
 }
 
-static int	fill_words(char **result,char sep,const char *s)
+static int	fill_words(char **result, char sep, const char *s)
 {
 	size_t	start;
 	size_t	i;
-	int	word;
-	
+	int		word;
+
 	i = 0;
 	start = 0;
 	word = 0;
 	while (s[i])
+	{
+		if (s[i] != sep && (i == 0 || s[i - 1] == sep))
+			start = i;
+		if (s[i] != sep && (s[i + 1] == sep || s[i + 1] == '\0'))
 		{
-			if (s[i] != sep && (i == 0 || s[i - 1] == sep))
-				start = i;
-			if (s[i] != sep && (s[i + 1] == sep || s[i + 1] == '\0'))
-			{
-				result[word] = str_alloc(s, start, i + 1);
-				if (!result[word])
-					return ((int)ft_free(result, word));
-				word++;
-			}
+			result[word] = str_alloc(s, start, i + 1);
+			if (!result[word])
+				return ((int)ft_free(result, word));
+			word++;
+		}
 		i++;
 	}
 	return (1);
@@ -96,8 +96,8 @@ char	**ft_split(const char *s, char sep)
 	result = (char **)malloc((words + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
-		if (!fill_words(result,sep,s))
-			return (NULL);
+	if (!fill_words(result, sep, s))
+		return (NULL);
 	result[words] = NULL;
 	return (result);
 }
