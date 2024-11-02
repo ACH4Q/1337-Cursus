@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:14:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/02 18:01:08 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/02 18:05:59 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char	*ft_itoa(int n)
 	long long	j;
 	char		*str;
 
+    j = n;
 	len = number_len(n);
-	j = n;
 	str = malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
