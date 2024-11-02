@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:14:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/02 18:10:29 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/02 18:10:51 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ static int	number_len(long long n)
 char	*ft_itoa(int n)
 {
 	int			len;
-	long long	j = n;  // Use long long to handle INT_MIN correctly
+	long long	j;
 	char		*str;
 
+	j = n;
 	len = number_len(j);
 	str = malloc((len + 1) * sizeof(char));
 	if (!str)
