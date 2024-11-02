@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:50:35 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/01 22:22:49 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/02 17:58:44 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	}
 	return (src_len + dst_len);
 }
-
