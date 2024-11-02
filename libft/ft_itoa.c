@@ -6,60 +6,57 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:14:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/02 17:55:18 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/02 17:58:20 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static  int number_len(int n)
+static int	number_len(int n)
 {
-    int counter;
+	int	counter;
 
-    counter = 0;
-    if(n < 0)
-    {
-        counter++;
-        n = -n;
-    }
-    if (n == 0)
-        counter++;
-    while (n > 0)
-    {
-        n /= 10;
-        counter++;
-    }
-    return (counter);
+	counter = 0;
+	if (n <= 0)
+	{
+		counter++;
+		n = -n;
+	}
+	while (n > 0)
+	{
+		n /= 10;
+		counter++;
+	}
+	return (counter);
 }
 
-char    *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-    int len;
-    int i;
-    long long j;
-    
-    i = number_len(n);
-    len = number_len(n);
-    j = n;
-    char *str = malloc((number_len(j) + 1)* sizeof(char));
-        if (!str)
-            return (NULL);
-        if (j < 0)
-        {
-           str[0] = '-';
-           j = -j;
-        }
-        if (j == 0)
-        {
-            str[0] = '0';
-            return (str);
-        }
-        i = number_len(n) - 1;
-        while (j > 0)
-        {
-            str[i--] = (j % 10) + 48;
-            j /= 10;
-        }
-       str[len] = '\0';
-        return(str);
+	int			len;
+	long long	j;
+	char		*str;
+
+	len = number_len(n);
+	j = n;
+	str = malloc((len + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	str[len] = '\0';
+	if (j < 0)
+	{
+		str[0] = '-';
+		j = -j;
+	}
+	else if (j == 0)
+	{
+		str[0] = '0';
+		return (str);
+	}
+	while (j > 0)
+	{
+		str[--len] = (j % 10) + '0';
+		j /= 10;
+	}
+	return (str);
 }
