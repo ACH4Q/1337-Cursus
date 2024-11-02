@@ -8,7 +8,6 @@ fi
 
 COMMIT_MSG=${1:-"Auto commit on $(date)"}
 
-# Git commands
 git add .
 git commit -m "Add new function in Libft"
 git push origin main  
