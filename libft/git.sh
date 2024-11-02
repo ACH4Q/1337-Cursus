@@ -6,7 +6,6 @@ if git diff --quiet && git diff --cached --quiet; then
     exit 0
 fi
 
-# Default commit message if not provided as an argument
 COMMIT_MSG=${1:-"Auto commit on $(date)"}
 
 # Git commands
