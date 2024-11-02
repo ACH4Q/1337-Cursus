@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:14:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/02 17:45:32 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/02 17:46:17 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,4 @@ char    *ft_itoa(int n)
         }
         str[number_len(j)] = 0;
         return(str);
-}
-
-#include <limits.h>
-#include <stdio.h>
-int main()
-{
-    char *s = ft_itoa(INT_MIN);
-    printf("%s", s);
 }
