@@ -14,5 +14,5 @@ git add .
 git commit -m "Add new function in Libft"
 git push origin main  # Change 'main' if your branch name is different
 
-# Confirm success
+
 echo "Changes have been pushed to the repository!"
