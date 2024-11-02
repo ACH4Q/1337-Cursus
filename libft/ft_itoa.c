@@ -6,25 +6,23 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:14:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/02 18:09:13 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/02 18:10:29 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static int	number_len(int n)
+static int	number_len(long long n)
 {
 	int	counter;
 
 	counter = 0;
-	if (n < 0)
+	if (n <= 0)
 	{
 		counter++;
 		n = -n;
 	}
-    if (n == 0)
-        counter++;
 	while (n > 0)
 	{
 		n /= 10;
@@ -36,11 +34,10 @@ static int	number_len(int n)
 char	*ft_itoa(int n)
 {
 	int			len;
-	long long	j;
+	long long	j = n;  // Use long long to handle INT_MIN correctly
 	char		*str;
 
-    j = n;
-	len = number_len(n);
+	len = number_len(j);
 	str = malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
@@ -51,7 +48,10 @@ char	*ft_itoa(int n)
 		j = -j;
 	}
 	else if (j == 0)
+	{
 		str[0] = '0';
+		return (str);
+	}
 	while (j > 0)
 	{
 		str[--len] = (j % 10) + '0';
