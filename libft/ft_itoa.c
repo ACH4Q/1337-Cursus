@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:14:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/02 18:05:59 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/02 18:09:13 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ static int	number_len(int n)
 	int	counter;
 
 	counter = 0;
-	if (n <= 0)
+	if (n < 0)
 	{
 		counter++;
 		n = -n;
 	}
+    if (n == 0)
+        counter++;
 	while (n > 0)
 	{
 		n /= 10;
