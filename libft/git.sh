@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if git diff --quiet && git diff --cached --quiet; then
     echo "No changes to push."
     exit 0
