@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:14:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/02 17:47:19 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/02 17:52:37 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ static  int number_len(int n)
 
 char    *ft_itoa(int n)
 {
+    int len;
     int i;
     long long j;
 
+    len = number_len(n);
     j = n;
     char *str = malloc((number_len(j) + 1)* sizeof(char));
         if (!str)
@@ -57,6 +59,6 @@ char    *ft_itoa(int n)
             str[i--] = (j % 10) + 48;
             j /= 10;
         }
-        str[number_len(j)] = '\0';
+        str[number_len(len)] = '\0';
         return(str);
 }
