@@ -3,29 +3,24 @@
 #                                                         :::      ::::::::    #
 #    script.sh                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+         #
+#    By: machaq <machaq@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/28 18:09:35 by machaq            #+#    #+#              #
-#    Updated: 2024/10/28 18:09:36 by machaq           ###   ########.fr        #
+#    Updated: 2024/11/02 17:37:55 by machaq           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/bash
 
-# Check if there are changes to commit
 if git diff --quiet && git diff --cached --quiet; then
     echo "No changes to push."
     exit 0
 fi
 
-# Default commit message if not provided as an argument
 COMMIT_MSG=${1:-"Auto commit on $(date)"}
 
-# Git commands
 git add .
 git commit -m "Update libft"
-git push origin main  # Change 'main' if your branch name is different
-
-# Confirm success
+git push origin main  
 echo "Changes have been pushed to the repository!"
 

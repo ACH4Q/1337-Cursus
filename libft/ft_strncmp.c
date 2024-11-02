@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 03:35:21 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/01 22:35:12 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/02 14:13:22 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,4 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (0);
-}
-int main()
-{
-	ft_strncmp("test" , "NULL", -1);
 }

@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 20:35:07 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/01 22:41:58 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/02 17:21:58 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,4 @@ char	**ft_split(const char *s, char sep)
 		return (NULL);
 	result[words] = NULL;
 	return (result);
-}
-int main()
-{
-	char *s = "test\0test\0test\0";
-	char **splited = ft_split(s, '\0');
-	int i = 0;
-	while (splited[i])
-	{
-		printf("%s\n", splited[i]);
-		i++;
-	}
-	free(splited);
 }
