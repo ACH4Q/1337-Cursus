@@ -6,14 +6,14 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 17:21:32 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/03 17:27:05 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/03 17:27:53 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list  *ft_lstlast(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
-    ft_lstsize(lst);
-    return (lst);
+	ft_lstsize(lst);
+	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 16:49:27 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/03 17:10:57 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/03 17:27:35 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	ft_lstsize(t_list *lst)
 {
 	int	i;
-	
+
 	i = 0;
 	while (lst)
 	{
-		lst = lst-> next;
+		lst = lst->next;
 		i++;
 	}
 	return (i);
