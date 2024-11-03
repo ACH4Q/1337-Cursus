@@ -10,7 +10,7 @@ SRCS = ft_isdigit.c ft_memcpy.c ft_bzero.c ft_strdup.c \
         ft_memcmp.c ft_strchr.c ft_strlen.c ft_strtrim.c ft_strmapi.c \
         ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
         ft_putnbr_fd.c
-SRCS_BN = ft_lstnew_bonus.c 
+SRCS_BN = ft_lstnew_bonus.c \ ft_lstadd_front.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BN = $(SRCS_BN:.c=.o)

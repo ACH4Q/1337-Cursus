@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:57:47 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/03 15:29:25 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/03 15:34:32 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 t_list				*ft_lstnew(void *content);
+void				ft_lstadd_front(t_list **lst, t_list *new);
 
 #endif
