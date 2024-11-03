@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 17:21:32 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/03 17:22:16 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/03 17:26:47 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 t_list  *ft_lstlast(t_list *lst)
 {
-    
+    ft_lstsize(lst);
+    return (lst) 
 }
