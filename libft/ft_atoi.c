@@ -6,12 +6,12 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 04:54:48 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/30 14:11:58 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/04 13:17:50 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <limits.h>
+#include <stdio.h>
 
 int	ft_atoi(const char *str)
 {
@@ -39,4 +39,8 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (result * sign);
+}
+int	main()
+{
+	printf("%d",ft_atoi("-a1545"));
 }

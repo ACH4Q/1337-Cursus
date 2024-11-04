@@ -6,12 +6,12 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 09:29:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/04 11:02:04 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/04 13:23:53 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h>
 void	*ft_calloc(size_t count, size_t size)
 {
 	unsigned char	*char_calloc;
