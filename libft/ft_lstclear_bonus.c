@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 20:15:39 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/03 22:51:37 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/04 10:47:27 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		tmp = (*lst)->next;
 		ft_lstdelone(*lst, del);
 		*lst = tmp;
-		*lst = NULL;
 	}
+	*lst = NULL;
 }
