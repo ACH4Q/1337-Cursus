@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 09:55:59 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/25 10:00:07 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/05 19:24:08 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h>
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t			i;
@@ -28,4 +28,12 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		i++;
 	}
 	return (0);
+}
+int	main()
+{
+	int	c = '4';
+	// me
+	char s1 = 'a';
+	int	s2 = 'h';
+	printf("%d\n",ft_memcmp(&c,&s2,1));
 }
