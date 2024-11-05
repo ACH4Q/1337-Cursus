@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:56:10 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/23 08:56:16 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/05 15:23:30 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_bzero(void *b, size_t len)
 {
-	ft_memset(b, '\0', len);
+	ft_memset(b, 0, len);
 }

@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 04:54:48 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/04 13:17:50 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/05 14:49:04 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,4 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (result * sign);
-}
-int	main()
-{
-	printf("%d",ft_atoi("-a1545"));
 }

@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:50:35 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/04 14:27:52 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/05 14:49:54 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,4 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		dst[dstsize - 1] = '\0';
 	}
 	return (src_len + dst_len);
-}
-int	main()
-{
-	printf("%zu",ft_strlcat(NULL,NULL,0));
 }

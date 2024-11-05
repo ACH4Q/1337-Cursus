@@ -6,12 +6,11 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:14:04 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/02 18:13:30 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/05 16:00:54 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 static int	number_len(long long n)
 {
@@ -57,3 +56,4 @@ char	*ft_itoa(int n)
 	}
 	return (str);
 }
+

@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 18:36:56 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/04 14:11:49 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/05 14:49:39 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,5 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	if (!open(1))
-		return NULL;
 	write(fd, &c, 1);
 }
