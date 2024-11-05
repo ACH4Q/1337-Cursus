@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 09:51:19 by machaq            #+#    #+#             */
-/*   Updated: 2024/10/25 20:51:36 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/05 16:37:16 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ char	*ft_strdup(const char *s1)
 		dest[i] = s1[i];
 		i++;
 	}
-	dest[i] = 0;
+	dest[i] = '\0';
 	return (dest);
 }

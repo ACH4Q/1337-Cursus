@@ -6,13 +6,13 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 12:28:54 by ach4q             #+#    #+#             */
-/*   Updated: 2024/11/04 20:40:48 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/05 18:48:13 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-	#include "libft.h"
+#include "libft.h"
 
-	int	ft_isprint(int c)
-	{
-		return (c >= 32 && c <= 126);
-	}
+int	ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
+}
