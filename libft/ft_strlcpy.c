@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:49:06 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/05 18:47:55 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/06 00:12:50 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	src_len;
 
+	if (!dst && dstsize == 0)
+		return (ft_strlen(src));
 	src_len = ft_strlen(src);
 	if (src_len + 1 < dstsize)
 	{
