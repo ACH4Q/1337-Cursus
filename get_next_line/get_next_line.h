@@ -6,12 +6,12 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:12:59 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/21 20:20:27 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/21 20:22:26 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE.H
-#define GET_NEXT_LINE.H
+#ifndef GET_NEXT_LINE_H
+#define GET_NEXT_LINE_H
 
 #include <stdlib.h>
 #include <string.h>
