@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:58:14 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/21 21:54:51 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/21 23:44:43 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,32 @@ char *get_one_line(char *str)
 		*line++ = '\n';
 	*line++ = '\0';
 	return (line);	
+}
+
+char	*free_stash(char *str)
+{
+	char	*str2;
+	int		i;
+	int		i;
+
+	i = 0;
+	j = 0;
+	if (!str)
+		return (NULL);
+	while (str[i] && str[i] == '\n')
+		i++;
+	if (!str[i] || str[i] == '\n' && str[i + 1] = '\0')
+	{
+		free (str);
+		return (NULL);
+	}
+	str2 = malloc((ft_strlen(str) - i));
+	if (str2)
+	{
+		while (str[++i])
+			str2[j++] = str[i];
+		str2[j] = '\0';
+	}
+	free(str);
+	return (str2);
 }
