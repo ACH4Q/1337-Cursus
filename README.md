@@ -49,4 +49,4 @@ Documenting my projects in this repository allows me to:
 
 ## How to Use This Repository
 
-Feel free to browse through the projects, read the descriptions, and explore the code. Feedback, suggestions, and collaboration requests are always welcome
+Feel free to browse through the projects, read the descriptions, and explore the code. Feedback, suggestions, and collaboration requests are always welcome!
