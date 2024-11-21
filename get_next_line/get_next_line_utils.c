@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:58:14 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/21 23:44:43 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/21 23:47:18 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ size_t	ft_strlen(const char *s)
 {
 	size_t counter;
 	
+	counter = 0;
 	if (!s)
 		return (NULL);
 	while (*s)
