@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:58:14 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/21 21:20:03 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/21 21:54:51 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,22 @@ char	*ft_strchr(const char *s, int c)
 	if (char_c == '\0')
 		return ((char *)&s[i]);
 	return (NULL);
+}
+
+char *get_one_line(char *str)
+{
+	char	*line;
+	int		i;
+
+	if (!str)
+		return (NULL);
+	while (str && *str++ != '\n')
+		i++;
+	line = malloc(i + 2);
+	while (str && *str++ != '\n')
+		*line++ = *str++;
+	if (str = '\n')
+		*line++ = '\n';
+	*line++ = '\0';
+	return (line);	
 }
