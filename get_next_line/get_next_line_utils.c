@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:58:14 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/21 18:48:27 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/21 20:20:36 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	while (s1)
 		*allocated_str++ = *s1++;
-	free (s1)
+	free (s1);
 	while (s2)
 		*allocated_str++ = *s2++;
 	free (s2);
