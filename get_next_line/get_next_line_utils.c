@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:58:14 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/21 20:37:02 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/21 21:17:57 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (allocated_str);
 }
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t counter;
 	
@@ -48,3 +48,20 @@ size_t	ft_strlen(char *s)
 	return (counter);
 }
 
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned int	i;
+	char			char_c;
+
+	i = 0;
+	char_c = (char)c;
+	while (s[i])
+	{
+		if (s[i] == char_c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (char_c == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
+}
