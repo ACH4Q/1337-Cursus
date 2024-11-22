@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:49:09 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/22 21:14:52 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/22 21:27:17 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,23 @@ char    *get_static(int fd,char *str)
         if (i <= 0)
         {
             free(buffer);
-            return (str);;
+            return (str);
         }
-        
+        buffer[1] = '\0';
+        ft_strjoin(str,buffer);
     }
+    free (buffer);
+    return (str);
 }
-char    *get_next_line()
+char    *get_next_line(int fd)
 {
-    
+    char    static *str;
+    char            *buffer;
+
+    if (fd < 0|| BUFFER_SIZE <=0)
+        return (NULL);
+    str = get_static(str);
+    buffer = get_one_line(buffer);
+    str = free_static(str);
+    return (buffer);
 }

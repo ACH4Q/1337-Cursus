@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:12:59 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/22 18:26:28 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/22 21:28:11 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 size_t  ft_strlen(const char *s);
 char    get_one_line(char *str);
 char	*free_static(char *str);
+
+#ifndef BUFFER_SIZE
+#define BUFFER_SIZE 5
+#endif
 
 #endif
