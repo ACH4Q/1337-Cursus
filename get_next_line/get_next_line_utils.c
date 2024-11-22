@@ -6,30 +6,34 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:58:14 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/22 18:28:48 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/22 21:52:44 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char *ft_strjoin(char const *s1, char const *s2)
 {
-	char	*allocated_str;
+    char *allocated_str;
+    size_t i, j;
 
-	if (!s1 && !s2)
-		return (NULL);
-	if (!s1)
-		return (s2);
-	if (!s2)
-		return (s1);
-	allocated_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!allocated_str)
-		return (NULL);
-	while (s1)
-		*allocated_str++ = *s1++;
-	while (s2)
-		*allocated_str++ = *s2++;
-	return (allocated_str);
+    if (!s1 && !s2)
+        return (NULL);
+    if (!s1)
+        return (strdup(s2)); 
+    if (!s2)
+        return (strdup(s1));
+    allocated_str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+    if (!allocated_str)
+        return (NULL);
+    i = -1;
+    while (s1[++i])
+        allocated_str[i] = s1[i];
+    j = 0;
+    while (s2[j])
+        allocated_str[i++] = s2[j++];
+    allocated_str[i] = '\0';
+    return (allocated_str);
 }
 
 size_t	ft_strlen(const char *s)
@@ -38,7 +42,7 @@ size_t	ft_strlen(const char *s)
 	
 	counter = 0;
 	if (!s)
-		return (NULL);
+		return (0);
 	while (*s)
 	{
 		s++;
@@ -77,9 +81,9 @@ char *get_one_line(char *str)
 	line = malloc(i + 2);
 	while (str && *str++ != '\n')
 		*line++ = *str++;
-	if (str = '\n')
+	if (*str == '\n')
 		*line++ = '\n';
-	*line++ = '\0';
+	*line++ == '\0';
 	return (line);	
 }
 
@@ -95,7 +99,7 @@ char	*free_static(char *str)
 		return (NULL);
 	while (str[i] && str[i] == '\n')
 		i++;
-	if (!str[i] || str[i] == '\n' && str[i + 1] = '\0')
+	if (!str[i] || str[i] == '\n' && str[i + 1] == '\0')
 	{
 		free (str);
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 20:12:59 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/22 21:28:11 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/22 21:52:24 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 #include <stdio.h>
 #include <unistd.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
-size_t  ft_strlen(const char *s);
-char    get_one_line(char *str);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*get_next_line(int fd);
+char	*get_one_line(char *str);
 char	*free_static(char *str);
+size_t	ft_strlen(const char *s);
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 5
