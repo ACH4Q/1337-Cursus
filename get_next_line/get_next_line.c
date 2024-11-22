@@ -6,35 +6,38 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:49:09 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/22 22:05:36 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/22 23:43:50 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char    *get_static(int fd,char *str)
+char *get_static(int fd, char *str)
 {
-    char    *buffer;
-    int     i;
+    char *buffer;
+    char *temp;
+    int i;
 
-    i = 1;
     buffer = malloc(BUFFER_SIZE + 1);
     if (!buffer)
         return (NULL);
-    while (i > 0 && ft_strchr(buffer , '\n'))
+    i = 1;
+    while (i > 0)
     {
-        i = read(fd,buffer,BUFFER_SIZE);
+        i = read(fd, buffer, BUFFER_SIZE);
         if (i <= 0)
-        {
-            free(buffer);
-            return (str);
-        }
-        buffer[1] = '\0';
-        ft_strjoin(str,buffer);
+            break;
+        buffer[i] = '\0';
+        temp = ft_strjoin(str, buffer);
+        free(str);
+        str = temp;
+        if (ft_strchr(buffer, '\n'))
+            break;
     }
-    free (buffer);
+    free(buffer);
     return (str);
 }
+
 char    *get_next_line(int fd)
 {
     char        *buffer;
