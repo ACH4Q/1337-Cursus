@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:58:14 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/22 21:52:44 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/22 22:03:28 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char *get_one_line(char *str)
 		*line++ = *str++;
 	if (*str == '\n')
 		*line++ = '\n';
-	*line++ == '\0';
+	*line++ = '\0';
 	return (line);	
 }
 
@@ -99,7 +99,7 @@ char	*free_static(char *str)
 		return (NULL);
 	while (str[i] && str[i] == '\n')
 		i++;
-	if (!str[i] || str[i] == '\n' && str[i + 1] == '\0')
+	if (!str[i] || (str[i] == '\n') || (str[i + 1] == '\0'))
 	{
 		free (str);
 		return (NULL);

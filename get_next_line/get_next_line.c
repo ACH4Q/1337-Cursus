@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:49:09 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/22 21:54:07 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/22 22:05:36 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char    *get_static(int fd,char *str)
 }
 char    *get_next_line(int fd)
 {
-    char    static *str;
-    char            *buffer;
+    char        *buffer;
+    static char *str;
 
     if (fd < 0|| BUFFER_SIZE <=0)
         return (NULL);
