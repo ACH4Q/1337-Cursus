@@ -16,7 +16,7 @@ int main(void)
         printf("%s", get_next_line(fd));
 
       /// free(line);        
-    //}
+    }
     close(fd);
     return (0);
 }
