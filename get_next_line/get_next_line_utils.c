@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:58:14 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/23 03:32:40 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/23 18:24:35 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*get_one_line(char *str)
 		return (NULL);
 	i = 0;
 	while (str[i] &&str[i] != '\n')
-		i++;
+		++i;
 	line = malloc(i + 2);
 	if (!line)
 		return (NULL);
