@@ -17,6 +17,7 @@ int main(void)
 
       /// free(line);        
     //}
+    system("leaks")
     close(fd);
     return (0);
 }
