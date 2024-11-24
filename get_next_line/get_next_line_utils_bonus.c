@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 19:09:13 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/24 19:09:17 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/24 21:30:30 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	ft_strlen(const char *s)
 }
 
 char	*ft_strchr(char const *s, int c)
-{ 
+{
 	char	*p;
 
 	if (!s)
@@ -68,15 +68,15 @@ char	*get_one_line(char *str)
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (str[i] &&str[i] != '\n')
+	while (str[i] && str[i] != '\n')
 		++i;
 	line = malloc(i + 2);
 	if (!line)
 		return (NULL);
 	i = 0;
-	while (str[i] &&str[i] != '\n')
+	while (str[i] && str[i] != '\n')
 	{
-		line[i] =str[i];
+		line[i] = str[i];
 		i++;
 	}
 	if (str[i] == '\n')
@@ -87,9 +87,9 @@ char	*get_one_line(char *str)
 
 char	*free_static(char *str)
 {
-	char	*buffer;
-	int		i;
-	int		j;
+	char *buffer;
+	int i;
+	int j;
 
 	if (!str)
 		return (NULL);
