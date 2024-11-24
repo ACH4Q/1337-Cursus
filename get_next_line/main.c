@@ -12,7 +12,8 @@ int main(void)
 
     while ((line = get_next_line(fd)))
     {
-        printf("%s", get_next_line(fd));  
+        printf("%s", get_next_line(fd)); 
+        free(line);
     }
     close(fd);
     return (0);
