@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:49:09 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/24 19:14:16 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/24 19:14:23 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char    *get_next_line(int fd)
 
     if (fd < 0|| BUFFER_SIZE <=0)
         return (NULL);
-    str[fd] = get_static(fd,str);
+    str[fd] = get_static(fd,str[fd]);
     buffer = get_one_line(str[fd]);
     str[fd] = free_static(str[fd]);
     return (buffer);
