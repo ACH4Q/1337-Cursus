@@ -3,30 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 19:07:55 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/24 21:30:17 by machaq           ###   ########.fr       */
+/*   Created: 2024/11/26 05:38:37 by machaq            #+#    #+#             */
+/*   Updated: 2024/11/26 05:38:41 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 500
 # endif
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <limits.h>
 
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
 char	*get_next_line(int fd);
-char	*get_one_line(char *str);
-char	*free_static(char *str);
+
 size_t	ft_strlen(const char *s);
+
+int		check_new_line(char *str);
+
+char	*ft_cut(char *str);
+
+char	*ft_strjoin(char *s1, char *s2);
+
+char	*ft_get_line(char *str);
 
 #endif

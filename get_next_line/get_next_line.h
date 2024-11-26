@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 20:12:59 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/24 21:30:58 by machaq           ###   ########.fr       */
+/*   Created: 2024/11/26 05:39:18 by machaq            #+#    #+#             */
+/*   Updated: 2024/11/26 05:39:23 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,25 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 500
 # endif
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
 
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
 char	*get_next_line(int fd);
-char	*get_one_line(char *str);
-char	*free_static(char *str);
+
 size_t	ft_strlen(const char *s);
+
+int		check_new_line(char *str);
+
+char	*ft_cut(char *str);
+
+char	*ft_strjoin(char *s1, char *s2);
+
+char	*ft_get_line(char *str);
+
+char	*read_file(int fd, char *str);
 
 #endif

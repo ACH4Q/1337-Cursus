@@ -3,50 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 19:08:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/24 21:30:04 by machaq           ###   ########.fr       */
+/*   Created: 2024/11/26 05:38:04 by machaq            #+#    #+#             */
+/*   Updated: 2024/11/26 05:39:34 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-char	*get_static(int fd, char *str)
+char	*read_file(int fd, char *str)
 {
-	char	*buffer;
-	char	*temp;
-	int		i;
+	char		buff[BUFFER_SIZE + 1];
+	int			red;
 
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return (NULL);
-	i = 1;
-	while (i > 0)
+	red = 1;
+	while (red != 0)
 	{
-		i = read(fd, buffer, BUFFER_SIZE);
-		if (i <= 0)
-			break ;
-		buffer[i] = '\0';
-		temp = ft_strjoin(str, buffer);
-		free(str);
-		str = temp;
-		if (ft_strchr(buffer, '\n'))
+		red = read (fd, buff, BUFFER_SIZE);
+		if (red == -1)
+		{
+			free(str);
+			return (NULL);
+		}
+		buff[red] = '\0';
+		str = ft_strjoin(str, buff);
+		if (check_new_line(str))
 			break ;
 	}
-	free(buffer);
 	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	char *buffer;
-	static char *str[1024];
+	static char	*str[1024];
+	char		*ptr;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	str[fd] = get_static(fd, str[fd]);
-	buffer = get_one_line(str[fd]);
-	str[fd] = free_static(str[fd]);
-	return (buffer);
+	str[fd] = read_file(fd, str[fd]);
+	ptr = ft_get_line(str[fd]);
+	str[fd] = ft_cut(str[fd]);
+	return (ptr);
 }
