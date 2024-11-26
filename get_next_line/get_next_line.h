@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 05:39:18 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/26 05:39:23 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/26 13:25:57 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	ft_strlen(const char *s);
 
 int		check_new_line(char *str);
 
-char	*ft_cut(char *str);
+char	*ft_remove(char *str);
 
 char	*ft_strjoin(char *s1, char *s2);
 

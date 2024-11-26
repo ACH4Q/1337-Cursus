@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 05:39:11 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/26 05:39:14 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/26 13:25:38 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	str = read_file(fd, str);
 	ptr = ft_get_line(str);
-	str = ft_cut(str);
+	str = ft_remove(str);
 	return (ptr);
 }
