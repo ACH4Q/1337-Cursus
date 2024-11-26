@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 05:39:18 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/26 13:25:57 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/26 13:26:12 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,11 @@
 # include <fcntl.h>
 
 char	*get_next_line(int fd);
-
 size_t	ft_strlen(const char *s);
-
 int		check_new_line(char *str);
-
 char	*ft_remove(char *str);
-
 char	*ft_strjoin(char *s1, char *s2);
-
 char	*ft_get_line(char *str);
-
 char	*read_file(int fd, char *str);
 
 #endif
