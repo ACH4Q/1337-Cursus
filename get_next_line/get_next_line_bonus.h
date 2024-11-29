@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 05:38:37 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/26 14:51:30 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/26 17:58:27 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1337
+#  define BUFFER_SIZE 1224
 # endif
 
 # include <unistd.h>
