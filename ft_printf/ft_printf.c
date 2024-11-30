@@ -6,17 +6,22 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 09:59:19 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 13:12:26 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int checker(char const *s,va_list args)
+static int checker(char const *s,va_list args,char flag)
 {
     int i;
     i = 0;
 
+    if (*s == '#' || *s == '+' || *s == ' ')
+    {
+        flag = *s;
+        ++s;
+    }
     if (*s == 'c')
         i = ft_putchar(va_arg(args,int));
     else if (*s == 's')
@@ -38,27 +43,35 @@ static int checker(char const *s,va_list args)
         i = ft_putchar('%');
     return (i);
 }
+
 int ft_printf(const char *s, ...)
 {
-    int     i;
+    int i = 0;
     va_list args;
-    va_start(args,s);
-    i = 0;
+    char flag = 0;
 
+    va_start(args, s);
     while (*s)
     {
-        if(*s == '%')
+        if (*s == '%')
         {
             ++s;
-            i += checker(s,args);
+            if (*s == '#' || *s == '+' || *s == ' ')
+            {
+                flag = *s;
+                ++s;
+            }
+            else
+                flag = 0;
+            i += checker(s, args, flag);
             ++s;
         }
         else
         {
-            i += ft_putchar(*s); 
-            ++s;    
+            i += ft_putchar(*s);
+            ++s;
         }
     }
     va_end(args);
-    return(i);
+    return (i);
 }

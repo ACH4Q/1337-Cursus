@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:43:42 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 10:03:33 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 10:33:19 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static int num_len_unsigned(unsigned int i)
 
 int ft_printunsnb(unsigned int i)
 {
+    if (i == 0)
+    {
+        ft_putchar('0');
+        return (1);
+    }
     if(i <= 9)
         ft_putchar(i + '0');
     else

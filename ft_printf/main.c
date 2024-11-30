@@ -10,6 +10,6 @@ int main()
     ft_printf("%p\n",&p);
     ft_printf("%x\n",435543);
     ft_printf("%X\n",345435345);
-    ft_printf("%u\n",3455);
+    ft_printf("%u\n",-3455);
     ft_printf("%%","sadsadasdsa");
 }

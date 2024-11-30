@@ -6,37 +6,35 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:50:15 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 10:20:08 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 13:09:29 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int num_len_hex(int nb)
+int ft_printhex(unsigned long address, const char *base, char flag)
 {
-    int i;
-    i = 0;
-    if (nb <= 0)
-        i++;
-    while (nb)
-    {
-        ++i;
-        nb /= 10;
-    }
-    return (i);
-}
+    int len = 0;
 
-int ft_printhex(unsigned long adress,const char *s)
-{
-    if (adress == 0)
+    if (address == 0)
     {
-        ft_putstr("0");
+        ft_putchar('0');
         return (1);
     }
-    if (adress > 15)
+
+    if (flag == '#' && address != 0)
     {
-        ft_printhex(adress / 16,s);
+        ft_putchar('0');
+        if (base[10] == 'a')
+            ft_putchar('x');
+        else
+            ft_putchar('X');
+        len += 2;
     }
-    ft_putchar(s[adress % 16]);
-    return(num_len_hex(adress));
+
+    if (address >= 16)
+        len += ft_printhex(address / 16, base, 0);
+
+    ft_putchar(base[address % 16]);
+    return (len + 1);
 }
