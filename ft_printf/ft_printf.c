@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 09:17:36 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 09:30:49 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ static int checker(char const *s,va_list args)
     int i;
     i = 0;
 
-    if (s == 'c')
+    if (*s == 'c')
         i = ft_putchar(va_arg(args,int));
-    else if (s == 's')
+    else if (*s == 's')
         i = ft_putstr(va_arg(args,char *));
-    else if (s == 'd' || s == 'i')
+    else if (*s == 'd' || *s == 'i')
         i = ft_printnb(va_arg(args,int));
-    else if (s == 'x')
-        i = ft_printunsnb(va_arg(args,unsigned int),"0123456789abcdef");
-    else if (s == 'X')
-        i = ft_printfunsnb(va_arg(args,unsigned int),"0123456789ABCDEF");
-    else if (s == 'p')
+    else if (*s == 'x')
+        i = ft_printunsnb(va_arg(args,unsigned int));
+    else if (*s == 'X')
+        i = ft_printunsnb(va_arg(args,unsigned int));
+    else if (*s == 'p')
     {
         i = ft_putstr("0x");
         i += ft_printhex(va_arg(args,unsigned long),"0123456789abcdef");
     }
-    else if (s == '%')
+    else if (*s == '%')
         i = ft_putchar('%');
     return (i);
 }
@@ -43,9 +43,9 @@ int ft_printf(const char *s, ...)
     va_start(args,s);
     i = 0;
 
-    while (s)
+    while (*s)
     {
-        if(s == '%')
+        if(*s == '%')
         {
             ++s;
             i += checker(s,args);
