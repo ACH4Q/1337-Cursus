@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 06:25:55 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 06:27:31 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 static int checker(char c,va_list args)
 {
-    if(c == 's')
+    int i;
+    i = 0;
 
+    if(c == 'c')
+        i += ft_putchar(va_arg(args,int));
 }
 int ft_printf(const char *s, ...)
 {
