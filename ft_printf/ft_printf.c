@@ -6,18 +6,18 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 06:27:31 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 06:27:54 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int checker(char c,va_list args)
+static int checker(char const *s,va_list args)
 {
     int i;
     i = 0;
 
-    if(c == 'c')
+    if(s == 'c')
         i += ft_putchar(va_arg(args,int));
 }
 int ft_printf(const char *s, ...)
