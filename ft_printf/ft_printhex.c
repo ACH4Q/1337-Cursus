@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:50:15 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 06:53:37 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 08:42:00 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ static int num_len(int nb)
 
 int ft_printfhex(unsigned long adress,const char *s)
 {
+    if (adress = NULL)
+    {
+        ft_putstr("(nil)");
+        return (5);
+    }
     if (adress > 15)
     {
         ft_printfhex(adress / 16,s);
