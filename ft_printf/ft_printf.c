@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 08:40:06 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 08:40:44 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ static int checker(char const *s,va_list args)
     else (s == 's')
         i += ft_putstr(va_arg(args,int));
     else (s == 'd' || s == 'i')
-        ft_printnb(va_arg(args,int));
+        i += ft_printnb(va_arg(args,int));
     else (s == 'x')
-        ft_printunsnb(va_arg(args,unsinged int));
+        i += ft_printunsnb(va_arg(args,unsinged int));
     else (s == 'X')
-        ft_printfunsnb(va_arg(args,unsigned int));
+        i += ft_printfunsnb(va_arg(args,unsigned int));
     else (s == 'p')
-        ft_printhex(va_arg(args),unsigned long);
+        i += ft_printhex(va_arg(args),unsigned long);
     else (s == '%')
-        ft_putchar('%');
+        i += ft_putchar('%');
 }
 int ft_printf(const char *s, ...)
 {
