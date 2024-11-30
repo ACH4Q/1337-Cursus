@@ -6,14 +6,14 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:08:05 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 16:08:20 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 17:29:05 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_putchar(char c)
+int	ft_putchar(char c)
 {
-    write(1, &c ,1);
-    return (1);
+	write(1, &c, 1);
+	return (1);
 }

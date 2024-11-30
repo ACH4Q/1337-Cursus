@@ -6,26 +6,26 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:08:32 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 16:08:50 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 17:28:40 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_putstr(const char *s)
+int	ft_putstr(const char *s)
 {
-    int i;
-    i = 0;
-    
-    if (s == NULL)
-    {
-        ft_putstr("(null)");
-        return(6);
-    }
-    while (*s)
-    {
-        ft_putchar(*s++);
-        i++;
-    }
-    return(i);
+	int	i;
+
+	i = 0;
+	if (s == NULL)
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
+	while (*s)
+	{
+		ft_putchar(*s++);
+		i++;
+	}
+	return (i);
 }

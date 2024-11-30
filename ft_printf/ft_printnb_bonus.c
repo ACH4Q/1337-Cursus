@@ -12,32 +12,33 @@
 
 #include "ft_printf_bonus.h"
 
-int ft_printnb(int nb, char flag)
+int	ft_printnb(int nb, char flag)
 {
-    int len = 0;
+	int	len;
 
-    if (nb == -2147483648)
-    {
-        write(1, "-2147483648", 11);
-        return (11);
-    }
-    if (nb < 0)
-    {
-        ft_putchar('-');
-        nb = -nb;
-    }
-    else if (flag == '+')
-    {
-        ft_putchar('+');
-        len++;
-    }
-    else if (flag == ' ')
-    {
-        ft_putchar(' ');
-        len++;
-    }
-    if (nb >= 10)
-        len += ft_printnb(nb / 10, 0);
-    ft_putchar((nb % 10) + '0');
-    return (len + 1);
+	len = 0;
+	if (nb == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return (11);
+	}
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		nb = -nb;
+	}
+	else if (flag == '+')
+	{
+		ft_putchar('+');
+		len++;
+	}
+	else if (flag == ' ')
+	{
+		ft_putchar(' ');
+		len++;
+	}
+	if (nb >= 10)
+		len += ft_printnb(nb / 10, 0);
+	ft_putchar((nb % 10) + '0');
+	return (len + 1);
 }
