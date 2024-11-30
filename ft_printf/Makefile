@@ -1,51 +1,43 @@
-# Compiler and flags
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
 
-# Project name
-NAME = libftprintf.a
-TEST_EXEC = test_printf
+NAME		= libftprintf.a
 
-# Source files
-MANDATORY_SRC = ft_printf.c ft_printnb.c ft_printhex.c ft_printunsnb.c ft_putchar.c ft_putstr.c
-BONUS_SRC = ft_bonus_flag.c
+MANDATORY_SRCS = ft_printf.c \
+				  ft_printhex.c \
+				  ft_printnb.c \
+				  ft_printunsnb.c \
+				  ft_putchar.c \
+				  ft_putstr.c
 
-# Object files
-MANDATORY_OBJ = $(MANDATORY_SRC:.c=.o)
-BONUS_OBJ = $(BONUS_SRC:.c=.o)
+BONUS_SRCS = ft_printf_bonus.c \
+			  ft_printhex_bonus.c \
+			  ft_printnb_bonus.c \
+			  ft_printunsnb_bonus.c \
+			  ft_putchar_bonus.c \
+			  ft_putstr_bonus.c
 
-# Default target
-all: $(NAME)
+MANDATORY_OBJS = ${MANDATORY_SRCS:.c=.o}
+BONUS_OBJS     = ${BONUS_SRCS:.c=.o}
 
-# Build library with mandatory files
-$(NAME): $(MANDATORY_OBJ)
-	ar rcs $(NAME) $(MANDATORY_OBJ)
+all: ${NAME}
 
-# Add bonus files to the library
-bonus: $(MANDATORY_OBJ) $(BONUS_OBJ)
-	ar rcs $(NAME) $(BONUS_OBJ)
+${NAME}: ${MANDATORY_OBJS}
+	ar rcs ${NAME} ${MANDATORY_OBJS}
 
-# Build and run the test for mandatory files
-test: all
-	$(CC) $(CFLAGS) main.c -L. -lftprintf -o $(TEST_EXEC)
-	./$(TEST_EXEC)
+bonus: ${MANDATORY_OBJS} ${BONUS_OBJS}
+	ar rcs ${NAME} ${MANDATORY_OBJS} ${BONUS_OBJS}
 
-# Build and run the test for bonus files
-test_bonus: bonus
-	$(CC) $(CFLAGS) main.c -L. -lftprintf -o $(TEST_EXEC)
-	./$(TEST_EXEC)
+%.o: %.c ft_printf.h
+	${CC} ${CFLAGS} -c $< -o $@
 
-# Compile object files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Clean object files
 clean:
-	rm -f $(MANDATORY_OBJ) $(BONUS_OBJ)
+	rm -f ${MANDATORY_OBJS} ${BONUS_OBJS}
 
-# Clean object files and the library
 fclean: clean
-	rm -f $(NAME) $(TEST_EXEC)
+	rm -f ${NAME}
 
-# Rebuild the library
+
 re: fclean all
+
+.PHONY: all bonus clean fclean re
