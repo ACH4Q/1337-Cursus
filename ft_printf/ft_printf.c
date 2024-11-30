@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 13:12:26 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 13:26:48 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ static int checker(char const *s,va_list args,char flag)
     else if (*s == 's')
         i = ft_putstr(va_arg(args,char *));
     else if (*s == 'd' || *s == 'i')
-        i = ft_printnb(va_arg(args,int));
+        i = ft_printnb(va_arg(args,int),flag);
     else if (*s == 'u')
         i = ft_printunsnb(va_arg(args,unsigned int));
     else if (*s == 'x')
-        i = ft_printhex(va_arg(args,unsigned long),"0123456789abcdef");
+        i = ft_printhex(va_arg(args,unsigned long),"0123456789abcdef",flag);
     else if (*s == 'X')
-        i = ft_printhex(va_arg(args,unsigned long),"0123456789ABCDEF");
+        i = ft_printhex(va_arg(args,unsigned long),"0123456789ABCDEF",flag);
     else if (*s == 'p')
     {
         i = ft_putstr("0x");
-        i += ft_printhex(va_arg(args,unsigned long),"0123456789abcdef");
+        i += ft_printhex(va_arg(args,unsigned long),"0123456789abcdef",flag);
     }
     else if (*s == '%')
         i = ft_putchar('%');

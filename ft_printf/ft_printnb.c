@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:36:09 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 13:10:46 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 13:25:13 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,30 @@
 
 int ft_printnb(int nb, char flag)
 {
+    int len = 0;
+
     if (nb == -2147483648)
     {
         write(1, "-2147483648", 11);
         return (11);
     }
-
     if (nb < 0)
     {
         ft_putchar('-');
         nb = -nb;
     }
     else if (flag == '+')
+    {
         ft_putchar('+');
+        len++;
+    }
     else if (flag == ' ')
+    {
         ft_putchar(' ');
-
+        len++;
+    }
     if (nb >= 10)
-        return (num_len(nb) + ft_printnb(nb / 10, 0));
-
+        len += ft_printnb(nb / 10, 0);
     ft_putchar((nb % 10) + '0');
-    return (num_len(nb));
+    return (len + 1);
 }
