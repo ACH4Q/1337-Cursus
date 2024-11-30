@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 08:45:22 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 08:45:49 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int checker(char const *s,va_list args)
     if (s == 'c')
         i = ft_putchar(va_arg(args,int));
     else (s == 's')
-        i = ft_putstr(va_arg(args,int));
+        i = ft_putstr(va_arg(args,char *));
     else (s == 'd' || s == 'i')
         i = ft_printnb(va_arg(args,int));
     else (s == 'x')
