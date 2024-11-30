@@ -6,11 +6,11 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 06:03:51 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 06:05:20 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_printf(const char *, ...)
+int ft_printf(const char *s, ...)
 {
     
 }
