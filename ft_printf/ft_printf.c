@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 06:27:54 by machaq           ###   ########.fr       */
+/*   Updated: 2024/11/30 06:28:16 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int ft_printf(const char *s, ...)
         if(s == '%')
         {
             ++s;
-            i = checker();
+            i = checker(s,args);
             ++s;
         }
         else
