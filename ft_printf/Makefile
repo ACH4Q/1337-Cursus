@@ -1,30 +1,51 @@
-NAME = libftprintf.a
-CC = cc
+# Compiler and flags
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-INCLUDE_DIR = ./includes
-SOURCE_DIR = ./sources
 
-CFILES = $(wildcard $(SOURCE_DIR)/*.c)
-SOURCES = $(CFILES:.c=.o)
+# Project name
+NAME = libftprintf.a
+TEST_EXEC = test_printf
 
-./$(SOURCE_DIR)/%.o: $(SOURCE_DIR)/%.c ./$(INCLUDE_DIR)/ft_printf.h
-	@echo "\033[0;33m[*] compiling $?\033[0m"
-	@$(CC) $(CFLAGS) $< -c -o $@
+# Source files
+MANDATORY_SRC = ft_printf.c ft_printnb.c ft_printhex.c ft_printunsnb.c ft_putchar.c ft_putstr.c
+BONUS_SRC = ft_bonus_flag.c
 
+# Object files
+MANDATORY_OBJ = $(MANDATORY_SRC:.c=.o)
+BONUS_OBJ = $(BONUS_SRC:.c=.o)
+
+# Default target
 all: $(NAME)
 
-$(NAME): $(SOURCES)
-	@echo "\033[0;32m[+] archiving *.o onto $(NAME)\033[0m"
-	@$(AR) rcs $@ $?
+# Build library with mandatory files
+$(NAME): $(MANDATORY_OBJ)
+	ar rcs $(NAME) $(MANDATORY_OBJ)
 
+# Add bonus files to the library
+bonus: $(MANDATORY_OBJ) $(BONUS_OBJ)
+	ar rcs $(NAME) $(BONUS_OBJ)
+
+# Build and run the test for mandatory files
+test: all
+	$(CC) $(CFLAGS) main.c -L. -lftprintf -o $(TEST_EXEC)
+	./$(TEST_EXEC)
+
+# Build and run the test for bonus files
+test_bonus: bonus
+	$(CC) $(CFLAGS) main.c -L. -lftprintf -o $(TEST_EXEC)
+	./$(TEST_EXEC)
+
+# Compile object files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean object files
 clean:
-	@echo "\033[1;31m[!] deleting *.o\033[0m"
-	@rm -rf $(SOURCES) *.out
+	rm -f $(MANDATORY_OBJ) $(BONUS_OBJ)
 
+# Clean object files and the library
 fclean: clean
-	@echo "\033[1;31m[!] deleting $(NAME) and *.o\033[0m"
-	@rm -f $(NAME)
+	rm -f $(NAME) $(TEST_EXEC)
 
+# Rebuild the library
 re: fclean all
-
-.PHONY: all clean fclean re
