@@ -41,3 +41,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all bonus clean fclean re
+
+.SECONDARY : ${MANDATORY_OBJS} ${BONUS_OBJS}

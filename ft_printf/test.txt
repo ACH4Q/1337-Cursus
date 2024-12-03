@@ -1,42 +1,42 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 18:13:45 by machaq           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    test.txt                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/30 05:59:16 by machaq            #+#    #+#              #
+#    Updated: 2024/12/03 22:19:53 by machaq           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 #include "ft_printf_bonus.h"
 
 int	checker(char spec, va_list args, char flag)
 {
-	int	i;
+	int	len;
 
-	i = 0;
+	len = 0;
 	if (spec == 'c')
-		i = ft_putchar(va_arg(args, int));
+		len = ft_putchar(va_arg(args, int));
 	else if (spec == 's')
-		i = ft_putstr(va_arg(args, char *));
+		len = ft_putstr(va_arg(args, char *));
 	else if (spec == 'd' || spec == 'i')
-		i = ft_printnb(va_arg(args, int), flag);
+		len = ft_printnb(va_arg(args, int), flag);
 	else if (spec == 'u')
-		i = ft_printunsnb(va_arg(args, unsigned int));
+		len = ft_printunsnb(va_arg(args, unsigned int));
 	else if (spec == 'x')
-		i = ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
+		len = ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
 	else if (spec == 'X')
-		i = ft_printhex(va_arg(args, unsigned long), "0123456789ABCDEF", flag);
+		len = ft_printhex(va_arg(args, unsigned long), "0123456789ABCDEF", flag);
 	else if (spec == 'p')
 	{
-		i = ft_putstr("0x");
-		i += ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
+		len = ft_putstr("0x");
+		len += ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
 	}
 	else if (spec == '%')
-		i = ft_putchar('%');
-	return (i);
+		len = ft_putchar('%');
+	return (len);
 }
 
 int	ft_printf(const char *s, ...)
@@ -58,7 +58,8 @@ int	ft_printf(const char *s, ...)
 				flag = *s;
 				s++;
 			}
-			i += checker(*s, args, flag);
+			if (*s)
+				i += checker(*s, args, flag);
 		}
 		else
 			i += ft_putchar(*s);
@@ -75,7 +76,7 @@ int	ft_printf(const char *s, ...)
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:05:13 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 18:13:27 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:09:00 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,29 +84,29 @@ int	ft_printf(const char *s, ...)
 
 int	checker(char spec, va_list args, char flag)
 {
-	int	i;
+	int	len;
 
-	i = 0;
+	len = 0;
 	if (spec == 'c')
-		i = ft_putchar(va_arg(args, int));
+		len = ft_putchar(va_arg(args, int));
 	else if (spec == 's')
-		i = ft_putstr(va_arg(args, char *));
+		len = ft_putstr(va_arg(args, char *));
 	else if (spec == 'd' || spec == 'i')
-		i = ft_printnb(va_arg(args, int), flag);
+		len = ft_printnb(va_arg(args, int), flag);
 	else if (spec == 'u')
-		i = ft_printunsnb(va_arg(args, unsigned int));
+		len = ft_printunsnb(va_arg(args, unsigned int));
 	else if (spec == 'x')
-		i = ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
+		len = ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
 	else if (spec == 'X')
-		i = ft_printhex(va_arg(args, unsigned long), "0123456789ABCDEF", flag);
+		len = ft_printhex(va_arg(args, unsigned long), "0123456789ABCDEF", flag);
 	else if (spec == 'p')
 	{
-		i = ft_putstr("0x");
-		i += ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
+		len = ft_putstr("0x");
+		len += ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
 	}
 	else if (spec == '%')
-		i = ft_putchar('%');
-	return (i);
+		len = ft_putchar('%');
+	return (len);
 }
 
 int	ft_printf(const char *s, ...)
@@ -127,7 +128,8 @@ int	ft_printf(const char *s, ...)
 				flag = *s;
 				s++;
 			}
-			i += checker(*s, args, flag);
+			if (*s)
+				i += checker(*s, args, flag);
 		}
 		else
 			i += ft_putchar(*s);
@@ -144,7 +146,7 @@ int	ft_printf(const char *s, ...)
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:50:15 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 13:37:29 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:12:27 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +184,7 @@ int	ft_printhex(unsigned long address, const char *base, char flag)
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:06:10 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 16:06:24 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:12:02 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +222,7 @@ int	ft_printhex(unsigned long address, const char *base, char flag)
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:36:09 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 18:07:46 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:11:40 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,23 +237,15 @@ int	ft_printnb(int nb, char flag)
 		return (write(1, "-2147483648", 11));
 	if (nb < 0)
 	{
-		ft_putchar('-');
+		len += ft_putchar('-');
 		nb = -nb;
 	}
-	else if (flag == '+')
-	{
-		ft_putchar('+');
-		len++;
-	}
-	else if (flag == ' ')
-	{
-		ft_putchar(' ');
-		len++;
-	}
+	else if (flag == '+' || flag == ' ')
+		len += ft_putchar(flag);
 	if (nb >= 10)
 		len += ft_printnb(nb / 10, 0);
-	ft_putchar((nb % 10) + '0');
-	return (len + 1);
+	len += ft_putchar((nb % 10) + '0');
+	return (len);
 }
 /* ************************************************************************** */
 /*                                                                            */
@@ -261,7 +255,7 @@ int	ft_printnb(int nb, char flag)
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:06:39 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 18:07:00 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:11:26 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,23 +270,15 @@ int	ft_printnb(int nb, char flag)
 		return (write(1, "-2147483648", 11));
 	if (nb < 0)
 	{
-		ft_putchar('-');
+		len += ft_putchar('-');
 		nb = -nb;
 	}
-	else if (flag == '+')
-	{
-		ft_putchar('+');
-		len++;
-	}
-	else if (flag == ' ')
-	{
-		ft_putchar(' ');
-		len++;
-	}
+	else if (flag == '+' || flag == ' ')
+		len += ft_putchar(flag);
 	if (nb >= 10)
 		len += ft_printnb(nb / 10, 0);
-	ft_putchar((nb % 10) + '0');
-	return (len + 1);
+	len += ft_putchar((nb % 10) + '0');
+	return (len);
 }
 /* ************************************************************************** */
 /*                                                                            */
@@ -302,7 +288,7 @@ int	ft_printnb(int nb, char flag)
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:43:42 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 13:37:36 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:11:06 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,8 +306,8 @@ int	ft_printunsnb(unsigned int i)
 	}
 	if (i >= 10)
 		len += ft_printunsnb(i / 10);
-	ft_putchar((i % 10) + '0');
-	return (len + 1);
+	len += ft_putchar((i % 10) + '0');
+	return (len);
 }
 /* ************************************************************************** */
 /*                                                                            */
@@ -331,7 +317,7 @@ int	ft_printunsnb(unsigned int i)
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:07:33 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 16:07:47 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:10:54 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -349,8 +335,8 @@ int	ft_printunsnb(unsigned int i)
 	}
 	if (i >= 10)
 		len += ft_printunsnb(i / 10);
-	ft_putchar((i % 10) + '0');
-	return (len + 1);
+	len += ft_putchar((i % 10) + '0');
+	return (len);
 }
 /* ************************************************************************** */
 /*                                                                            */
@@ -398,7 +384,7 @@ int	ft_putchar(char c)
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:32:24 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 17:30:56 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:10:14 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -406,20 +392,17 @@ int	ft_putchar(char c)
 
 int	ft_putstr(const char *s)
 {
-	int	i;
+	int	len;
 
-	i = 0;
+	len = 0;
 	if (s == NULL)
 	{
 		ft_putstr("(null)");
 		return (6);
 	}
 	while (*s)
-	{
-		ft_putchar(*s++);
-		i++;
-	}
-	return (i);
+		len += ft_putchar(*s++);
+	return (len);
 }
 /* ************************************************************************** */
 /*                                                                            */
@@ -429,7 +412,7 @@ int	ft_putstr(const char *s)
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:08:32 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 17:28:40 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:09:52 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -437,21 +420,21 @@ int	ft_putstr(const char *s)
 
 int	ft_putstr(const char *s)
 {
-	int	i;
+	int	len;
 
-	i = 0;
+	len = 0;
 	if (s == NULL)
 	{
 		ft_putstr("(null)");
 		return (6);
 	}
 	while (*s)
-	{
-		ft_putchar(*s++);
-		i++;
-	}
-	return (i);
+		len += ft_putchar(*s++);
+	return (len);
 }
+
+ (MAKEFILE)
+ 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
