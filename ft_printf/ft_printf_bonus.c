@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 18:13:45 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:09:11 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 int	checker(char spec, va_list args, char flag)
 {
-	int	i;
+	int	len;
 
-	i = 0;
+	len = 0;
 	if (spec == 'c')
-		i = ft_putchar(va_arg(args, int));
+		len = ft_putchar(va_arg(args, int));
 	else if (spec == 's')
-		i = ft_putstr(va_arg(args, char *));
+		len = ft_putstr(va_arg(args, char *));
 	else if (spec == 'd' || spec == 'i')
-		i = ft_printnb(va_arg(args, int), flag);
+		len = ft_printnb(va_arg(args, int), flag);
 	else if (spec == 'u')
-		i = ft_printunsnb(va_arg(args, unsigned int));
+		len = ft_printunsnb(va_arg(args, unsigned int));
 	else if (spec == 'x')
-		i = ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
+		len = ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
 	else if (spec == 'X')
-		i = ft_printhex(va_arg(args, unsigned long), "0123456789ABCDEF", flag);
+		len = ft_printhex(va_arg(args, unsigned long), "0123456789ABCDEF", flag);
 	else if (spec == 'p')
 	{
-		i = ft_putstr("0x");
-		i += ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
+		len = ft_putstr("0x");
+		len += ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
 	}
 	else if (spec == '%')
-		i = ft_putchar('%');
-	return (i);
+		len = ft_putchar('%');
+	return (len);
 }
 
 int	ft_printf(const char *s, ...)
@@ -58,7 +58,8 @@ int	ft_printf(const char *s, ...)
 				flag = *s;
 				s++;
 			}
-			i += checker(*s, args, flag);
+			if (*s)
+				i += checker(*s, args, flag);
 		}
 		else
 			i += ft_putchar(*s);

@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:07:33 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 16:07:47 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/03 22:10:54 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	ft_printunsnb(unsigned int i)
 	}
 	if (i >= 10)
 		len += ft_printunsnb(i / 10);
-	ft_putchar((i % 10) + '0');
-	return (len + 1);
+	len += ft_putchar((i % 10) + '0');
+	return (len);
 }
