@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:06:10 by machaq            #+#    #+#             */
-/*   Updated: 2024/11/30 17:30:46 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/04 13:15:35 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ int	ft_printhex(unsigned long adress, const char *base, char flag);
 int	ft_printnb(int nb, char flag);
 int	ft_putchar(char c);
 int	ft_printunsnb(unsigned int i);
+int	handle_string(const char *str);
+int	handle_pointer(unsigned long address);
 
 #endif

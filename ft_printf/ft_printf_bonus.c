@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 05:59:16 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/03 22:09:11 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/04 13:14:48 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,62 @@ int	checker(char spec, va_list args, char flag)
 	if (spec == 'c')
 		len = ft_putchar(va_arg(args, int));
 	else if (spec == 's')
-		len = ft_putstr(va_arg(args, char *));
+		len = handle_string(va_arg(args, char *));
 	else if (spec == 'd' || spec == 'i')
 		len = ft_printnb(va_arg(args, int), flag);
 	else if (spec == 'u')
 		len = ft_printunsnb(va_arg(args, unsigned int));
 	else if (spec == 'x')
-		len = ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
+		len = ft_printhex((unsigned long)va_arg(args, unsigned int),
+				"0123456789abcdef", flag);
 	else if (spec == 'X')
-		len = ft_printhex(va_arg(args, unsigned long), "0123456789ABCDEF", flag);
+		len = ft_printhex((unsigned long)va_arg(args, unsigned int),
+				"0123456789ABCDEF", flag);
 	else if (spec == 'p')
-	{
-		len = ft_putstr("0x");
-		len += ft_printhex(va_arg(args, unsigned long), "0123456789abcdef", flag);
-	}
+		len = handle_pointer((unsigned long)va_arg(args, void *));
 	else if (spec == '%')
 		len = ft_putchar('%');
+	return (len);
+}
+
+int	handle_string(const char *str)
+{
+	int	len;
+	int	str_len;
+
+	len = 0;
+	str_len = 0;
+	if (str == NULL)
+		str = "(null)";
+	while (str[str_len])
+		str_len++;
+	len += ft_putstr(str);
+	return (len);
+}
+
+int	handle_pointer(unsigned long address)
+{
+	int	len;
+
+	len = 0;
+	if (address == 0)
+		len = ft_putstr("(nil)");
+	else
+	{
+		len += ft_putstr("0x");
+		len += ft_printhex(address, "0123456789abcdef", 0);
+	}
 	return (len);
 }
 
 int	ft_printf(const char *s, ...)
 {
 	va_list	args;
-	int		i;
+	int		len;
 	char	flag;
 
+	len = 0;
 	va_start(args, s);
-	i = 0;
 	while (*s)
 	{
 		if (*s == '%')
@@ -54,17 +83,15 @@ int	ft_printf(const char *s, ...)
 			s++;
 			flag = 0;
 			if (*s == '#' || *s == '+' || *s == ' ')
-			{
-				flag = *s;
-				s++;
-			}
+				flag = *s++;
 			if (*s)
-				i += checker(*s, args, flag);
+				len += checker(*s, args, flag);
 		}
 		else
-			i += ft_putchar(*s);
-		s++;
+			len += ft_putchar(*s);
+		if (*s)
+			s++;
 	}
 	va_end(args);
-	return (i);
+	return (len);
 }

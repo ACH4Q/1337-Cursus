@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:32:24 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/03 22:10:14 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/04 08:26:27 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ int	ft_putstr(const char *s)
 
 	len = 0;
 	if (s == NULL)
-	{
-		ft_putstr("(null)");
-		return (6);
-	}
+		return (ft_putstr("(null)"));
 	while (*s)
 		len += ft_putchar(*s++);
 	return (len);

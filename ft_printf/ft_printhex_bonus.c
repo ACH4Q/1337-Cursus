@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:50:15 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/03 22:12:27 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/04 09:02:00 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,20 @@ int	ft_printhex(unsigned long address, const char *base, char flag)
 	int	len;
 
 	len = 0;
+	if (!base || (base[10] != 'a' && base[10] != 'A'))
+		return (0);
 	if (address == 0)
-	{
-		ft_putchar('0');
-		return (1);
-	}
+		return (ft_putchar('0'));
 	if (flag == '#' && address != 0)
 	{
-		ft_putchar('0');
+		len += ft_putchar('0');
 		if (base[10] == 'a')
-			ft_putchar('x');
+			len += ft_putchar('x');
 		else
-			ft_putchar('X');
-		len += 2;
+			len += ft_putchar('X');
 	}
 	if (address >= 16)
 		len += ft_printhex(address / 16, base, 0);
-	ft_putchar(base[address % 16]);
-	return (len + 1);
+	len += ft_putchar(base[address % 16]);
+	return (len);
 }
