@@ -1,45 +1,30 @@
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+SRCS_MANDATORY = ft_printf.c ft_putchar.c ft_putstr.c ft_printnb.c ft_printhex.c ft_printunsnb.c
+OBJS_MANDATORY = $(SRCS_MANDATORY:.c=.o)
 
-NAME		= libftprintf.a
+SRCS_BONUS = ft_printf_bonus.c ft_putchar_bonus.c ft_putstr_bonus.c ft_printnb_bonus.c ft_printhex_bonus.c ft_printunsnb_bonus.c
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
-MANDATORY_SRCS = ft_printf.c \
-				  ft_printhex.c \
-				  ft_printnb.c \
-				  ft_printunsnb.c \
-				  ft_putchar.c \
-				  ft_putstr.c
+NAME = libftprintf.a
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
-BONUS_SRCS = ft_printf_bonus.c \
-			  ft_printhex_bonus.c \
-			  ft_printnb_bonus.c \
-			  ft_printunsnb_bonus.c \
-			  ft_putchar_bonus.c \
-			  ft_putstr_bonus.c
+all: $(NAME)
 
-MANDATORY_OBJS = ${MANDATORY_SRCS:.c=.o}
-BONUS_OBJS     = ${BONUS_SRCS:.c=.o}
+$(NAME): $(OBJS_MANDATORY)
+	ar rcs $(NAME) $(OBJS_MANDATORY)
 
-all: ${NAME}
-
-${NAME}: ${MANDATORY_OBJS}
-	ar rcs ${NAME} ${MANDATORY_OBJS}
-
-bonus: ${MANDATORY_OBJS} ${BONUS_OBJS}
-	ar rcs ${NAME} ${MANDATORY_OBJS} ${BONUS_OBJS}
-
-%.o: %.c ft_printf.h
-	${CC} ${CFLAGS} -c $< -o $@
+bonus: $(OBJS_BONUS)
+	ar rcs $(NAME) $(OBJS_BONUS)
 
 clean:
-	rm -f ${MANDATORY_OBJS} ${BONUS_OBJS}
+	rm -f $(OBJS_MANDATORY) $(OBJS_BONUS)
 
 fclean: clean
-	rm -f ${NAME}
-
+	rm -f $(NAME)
 
 re: fclean all
 
 .PHONY: all bonus clean fclean re
+
 
 .SECONDARY : ${MANDATORY_OBJS} ${BONUS_OBJS}

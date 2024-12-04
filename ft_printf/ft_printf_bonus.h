@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 06:06:10 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/04 13:15:35 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/04 16:03:44 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	ft_putchar(char c);
 int	ft_printunsnb(unsigned int i);
 int	handle_string(const char *str);
 int	handle_pointer(unsigned long address);
+
 
 #endif
