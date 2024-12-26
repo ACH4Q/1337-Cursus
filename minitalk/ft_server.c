@@ -1,30 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_server.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 16:17:37 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/26 06:04:46 by machaq           ###   ########.fr       */
+/*   Created: 2024/12/25 16:51:11 by machaq            #+#    #+#             */
+/*   Updated: 2024/12/26 08:32:07 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-#define MINITALK_H
-
-#include <signal.h>
-#include <unistd.h>
-# include <bits/types/siginfo_t.h>
-# include <bits/sigaction.h>
-#include <stdio.h>
-
-void        ft_sender(__pid_t pid, char c);
-void        ft_putchar(char c);
-void        ft_putstr(char *s);
-int         ft_power(int nb, int power);
-void        ft_putnbr(int n);
-int         ft_atoi(const char *str);
+#include "minitalk.h"
 
 
-#endif
