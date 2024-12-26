@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:51:11 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/26 09:05:20 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/26 09:15:42 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,26 @@ void ft_btoa(int sig)
     }
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	int	pid;
+    int pid;
 
-	(void)argv;
-	if (argc != 1)
-	{
-		ft_putstr("Error\n");
-		return (1);
-	}
-	pid = getpid();
-	ft_putnbr(pid);
-	ft_putchar('\n');
-	while (argc == 1)
-	{
-		signal(SIGUSR1, ft_btoa);
-		signal(SIGUSR2, ft_btoa);
-		pause();
-	}
-	return (0);
+    (void)argv;
+    if (argc != 1)
+    {
+        ft_putstr("Error\n");
+        return (1);
+    }
+    pid = getpid();
+    ft_putstr("The server PID: ");
+    ft_putnbr(pid);
+    ft_putchar('\n');
+
+    signal(SIGUSR1, ft_btoa);
+    signal(SIGUSR2, ft_btoa);
+
+    while (1)
+        pause();
+
+    return (0);
 }

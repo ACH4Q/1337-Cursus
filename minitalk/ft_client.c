@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:16:03 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/26 05:11:41 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/26 09:17:51 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void ft_client(__pid_t pid, char *s)
         ft_sender(pid, *s);
         s++;
     }
+    ft_sender(pid, '\n');
     ft_sender(pid, '\0');
 }
 
