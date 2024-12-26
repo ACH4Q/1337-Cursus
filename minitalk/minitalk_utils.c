@@ -6,11 +6,9 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:18:20 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/26 05:17:22 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/26 09:07:15 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "minitalk.h"
 
 #include "minitalk.h"
 
@@ -60,8 +58,6 @@ void ft_putnbr(int n)
     }
 }
 
-#include "minitalk.h"
-
 void ft_sender(__pid_t pid, char c)
 {
     int bits = 0b10000000;
@@ -71,18 +67,12 @@ void ft_sender(__pid_t pid, char c)
         if (c & bits)
         {
             if (kill(pid, SIGUSR2) < 0)
-            {
-                ft_putstr("Error: Unable to send SIGUSR2.\n");
                 return;
-            }
         }
         else
         {
             if (kill(pid, SIGUSR1) < 0)
-            {
-                ft_putstr("Error: Unable to send SIGUSR1.\n");
                 return;
-            }
         }
         bits >>= 1;
         usleep(200);
