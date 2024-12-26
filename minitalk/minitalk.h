@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:17:37 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/26 06:04:46 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/26 09:19:30 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 #include <signal.h>
 #include <unistd.h>
-# include <bits/types/siginfo_t.h>
-# include <bits/sigaction.h>
-#include <stdio.h>
 
 void        ft_sender(__pid_t pid, char c);
 void        ft_putchar(char c);
