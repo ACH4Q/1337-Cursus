@@ -1,20 +1,49 @@
-NAME_CLIENT = client
-NAME_SERVER = server
-SRCS_CLIENT = ft_client.c minitalk_utils.c minitalk_utils1.c
-SRCS_SERVER = ft_server.c minitalk_utils.c minitalk_utils1.c
+CLIENT = ft_client.c
+CLIENT_BONUS = ft_client_bonus.c
+
+SERVER = ft_server.c
+SERVER_BONUS = ft_server_bonus.c
+
+UTILS =  minitalk_utils.c minitalk_utils1.c
+UTILS_BONUS = minitalk_utils_bonus.c minitalk_utils1_bonus.c
+
+NAME = client
+NAME_BONUS = client_bonus
+
+NAME_2 = server
+NAME_2_BONUS = server_bonus
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
+all: $(NAME) $(NAME_2)
 
-all: $(NAME_CLIENT) $(NAME_SERVER)
+bonus: $(NAME) $(NAME_2) $(NAME_BONUS) $(NAME_2_BONUS)
 
-$(NAME_CLIENT):
-	$(CC) $(CFLAGS) $(SRCS_CLIENT) -o $(NAME_CLIENT)
+$(NAME):
+	@echo "compiling \033[1;32m$(CLIENT)\033[0m"
+	@$(CC) $(CFLAGS) $(CLIENT) $(UTILS) -o $@
 
-$(NAME_SERVER):
-	$(CC) $(CFLAGS) $(SRCS_SERVER) -o $(NAME_SERVER)
+$(NAME_2):
+	@echo "compiling \033[1;32m$(SERVER)\033[0m"
+	@$(CC) $(CFLAGS) $(SERVER) $(UTILS) -o $@
+
+$(NAME_BONUS):
+	@echo "compiling \033[1;32m$(CLIENT_BONUS)\033[0m"
+	@$(CC) $(CFLAGS) $(CLIENT_BONUS) $(UTILS_BONUS) -o $@
+
+$(NAME_2_BONUS):
+	@echo "compiling \033[1;32m$(SERVER_BONUS)\033[0m"
+	@$(CC) $(CFLAGS) $(SERVER_BONUS) $(UTILS_BONUS) -o $@
 
 clean:
-	rm -f $(NAME_CLIENT) $(NAME_SERVER)
+	@echo "deleting all the executable files"
+	@rm -f $(NAME) $(NAME_2) $(NAME_BONUS) $(NAME_2_BONUS)
 
-re: clean all
+fclean: clean
+	@echo "deleting *.a"
+	@rm -f *.a
+
+re: fclean all
+
+.PHONY: all clean fclean re bonus

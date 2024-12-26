@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_server_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 16:51:11 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/26 11:43:32 by machaq           ###   ########.fr       */
+/*   Created: 2024/12/26 11:24:54 by machaq            #+#    #+#             */
+/*   Updated: 2024/12/26 11:38:43 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
-void ft_btoa(int sig)
+void ft_server(int sig)
 {
-    static int  bit = 0;
+    static int bit = 0;
     static char ascii = 0;
 
     if (sig == SIGUSR2)
@@ -24,6 +24,7 @@ void ft_btoa(int sig)
     if (bit == 8)
     {
         ft_putchar(ascii);
+        kill(getppid(), SIGUSR1);
         bit = 0;
         ascii = 0;
     }
@@ -44,8 +45,8 @@ int main(int argc, char **argv)
     ft_putnbr(pid);
     ft_putchar('\n');
 
-    signal(SIGUSR1, ft_btoa);
-    signal(SIGUSR2, ft_btoa);
+    signal(SIGUSR1, ft_server);
+    signal(SIGUSR2, ft_server);
 
     while (1)
         pause();
