@@ -6,75 +6,53 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:20:54 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/26 11:21:00 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/29 10:35:56 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void ft_putchar(char c)
+void	ft_putchar(char c)
 {
-    write(1, &c, 1);
+	write(1, &c, 1);
 }
 
-void ft_putstr(char *s)
+void	ft_putnbr(int nb)
 {
-    while (*s)
-    {
-        ft_putchar(*s);
-        s++;
-    }
+	if (nb <= 0)
+		write(1, "\nInvalid pid, most be more than zero\n\n", 38);
+	else if (nb >= 10)
+	{
+		ft_putnbr((nb / 10));
+		ft_putchar((nb % 10) + '0');
+	}
+	else
+		ft_putchar(nb + 48);
 }
 
-int ft_power(int nb, int power)
+int	ft_atoi(char *str)
 {
-    int result = 1;
+	int		i;
+	long	j;
+	int		k;
 
-    if (power < 0)
-        return (0);
-    while (power > 0)
-    {
-        result *= nb;
-        power--;
-    }
-    return (result);
-}
-
-void ft_putnbr(int n)
-{
-    if (n == -2147483648)
-        ft_putstr("-2147483648");
-    else if (n < 0)
-    {
-        ft_putchar('-');
-        ft_putnbr(-n);
-    }
-    else if (n < 10)
-        ft_putchar(n + '0');
-    else
-    {
-        ft_putnbr(n / 10);
-        ft_putnbr(n % 10);
-    }
-}
-
-void ft_sender(__pid_t pid, char c)
-{
-    int bits = 0b10000000;
-
-    while (bits)
-    {
-        if (c & bits)
-        {
-            if (kill(pid, SIGUSR2) < 0)
-                return;
-        }
-        else
-        {
-            if (kill(pid, SIGUSR1) < 0)
-                return;
-        }
-        bits >>= 1;
-        usleep(200);
-    }
+	i = 0;
+	k = 1;
+	j = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			k = -k;
+		i++;
+	}
+	while (str[i] != '\0' && ('0' <= str[i] && str[i] <= '9'))
+	{
+		j = (j * 10 + (str[i] - 48));
+		i++;
+	}
+	if (str[i] != '\0')
+		return(-42);
+	return ((int)j * k);
 }

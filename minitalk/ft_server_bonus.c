@@ -6,50 +6,74 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:24:54 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/26 11:38:43 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/29 10:03:39 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-void ft_server(int sig)
+void	clean_buffer(char *c, int *arr_numbit, int *arr_other_pid)
 {
-    static int bit = 0;
-    static char ascii = 0;
-
-    if (sig == SIGUSR2)
-        ascii |= (1 << (7 - bit));
-    bit++;
-
-    if (bit == 8)
-    {
-        ft_putchar(ascii);
-        kill(getppid(), SIGUSR1);
-        bit = 0;
-        ascii = 0;
-    }
+	if (*c != '\0')
+		write(1, &*c, 1);
+	*c = 0;
+	*arr_numbit = 0;
+	*arr_other_pid = 0;
 }
 
-int main(int argc, char **argv)
+void	check(int *arr_pid, int *arr_other_pid, int *info)
 {
-    int pid;
+	if (!*arr_other_pid)
+	{
+		*arr_pid = *info;
+		*arr_other_pid = 1;
+	}
+}
 
-    (void)argv;
-    if (argc != 1)
-    {
-        ft_putstr("Error\n");
-        return (1);
-    }
-    pid = getpid();
-    ft_putstr("The server PID: ");
-    ft_putnbr(pid);
-    ft_putchar('\n');
+void	handle_signal(int sig, siginfo_t *info, void *context)
+{
+	static int	arr[3];
+	static char	c;
 
-    signal(SIGUSR1, ft_server);
-    signal(SIGUSR2, ft_server);
+	check(&arr[PID], &arr[OTHER_PID], &info->si_pid);
+	if (info->si_pid != arr[PID])
+		return ;
+	(void) context;
+	if (sig == SIGUSR1)
+		c |= (1 << arr[NUMBIT]);
+	else if (sig == SIGUSR2)
+		c &= ~(1 << arr[NUMBIT]);
+	(arr[NUMBIT])++;
+	if (arr[NUMBIT] == 8)
+	{
+		if (c == '\0')
+		{
+			write(1, "\n", 1);
+			if (kill(info->si_pid, SIGUSR2) == -1)
+				write(1, "\n[ ==> error while sending <== ]\n\n", 35);
+		}
+		clean_buffer(&c, &arr[NUMBIT], &arr[OTHER_PID]);
+	}
+	if (kill(info->si_pid, SIGUSR1) == -1)
+		write(1, "\n[ ==> error while sending <== ]\n\n", 35);
+}
 
-    while (1)
-        pause();
+int	main(void)
+{
+	struct sigaction	sa;
 
-    return (0);
+	sa.sa_sigaction = handle_signal;
+	sa.sa_flags = SA_SIGINFO;
+	if (sigaction(SIGUSR1, &sa, NULL) == -1
+		|| sigaction(SIGUSR2, &sa, NULL) == -1)
+	{
+		write(1, "\n[ ==> error setting up signal handlers <== ]\n\n", 48);
+		return (1);
+	}
+	write(1, "this the pid :", 15);
+	ft_putnbr(getpid());
+	write (1, "\nwaiting for signal...\n", 24);
+	while (1)
+		pause();
+	return (0);
 }

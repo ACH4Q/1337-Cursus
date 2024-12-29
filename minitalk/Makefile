@@ -4,8 +4,8 @@ CLIENT_BONUS = ft_client_bonus.c
 SERVER = ft_server.c
 SERVER_BONUS = ft_server_bonus.c
 
-UTILS =  minitalk_utils.c minitalk_utils1.c
-UTILS_BONUS = minitalk_utils_bonus.c minitalk_utils1_bonus.c
+UTILS =  minitalk_utils.c 
+UTILS_BONUS = minitalk_utils_bonus.c 
 
 NAME = client
 NAME_BONUS = client_bonus

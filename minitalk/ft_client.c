@@ -6,38 +6,82 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:16:03 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/26 11:43:35 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/29 10:36:55 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void ft_client(__pid_t pid, char *s)
+
+int	var = 0;
+
+void	handel_kill(void)
 {
-    while (*s)
-    {
-        ft_sender(pid, *s);
-        s++;
-    }
-    ft_sender(pid, '\n');
-    ft_sender(pid, '\0');
+	write(1, "\n[ ==> error while sending <== ]\n\n", 35);
+	exit(1);
 }
 
-int main(int ac, char **av)
+void	handle_ack(int sig)
 {
-    if (ac != 3)
-    {
-        ft_putstr("Usage: ./client <SERVER_PID> <MESSAGE>\n");
-        return (1);
-    }
+	if (sig == SIGUSR1)
+		var = 1;
+	else
+		write (1, "\n[ ==> your message has been recieved🙂! <== ]\n\n", 51);
+}
 
-    __pid_t pid = ft_atoi(av[1]);
-    if (pid <= 0)
-    {
-        ft_putstr("Error: Invalid process ID.\n");
-        return (1);
-    }
+void	send_mess(int pid, char c)
+{
+	int	i;
 
-    ft_client(pid, av[2]);
-    return (0);
+	i = 0;
+	while (i < 8)
+	{
+		if ((c >> i) & 1)
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				handel_kill();
+		}
+		else
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				handel_kill();
+		}
+		while (var == 0)
+			pause();
+		usleep(100);
+		var = 0;
+		i++;
+	}
+}
+
+int	main(int ac, char **av)
+{
+	int		pid;
+	char	*s;
+	int		i;
+
+	if (ac != 3)
+	{
+		write(1, "\n[ ==> ./client <server_pid> <message> <== ]\n\n", 47);
+		return (1);
+	}
+	pid = ft_atoi(av[1]);
+	s = av[2];
+	i = 0;
+	if (pid < -1)
+		handel_kill();
+	if (pid == -1)
+	{
+		write (1, "invalide PID\n", 21);
+		return (1);
+	}
+	signal(SIGUSR1, handle_ack);
+	signal(SIGUSR2, handle_ack);
+	while (s[i])
+	{
+		send_mess(pid, s[i]);
+		i++;
+	}
+	send_mess(pid, '\0');
+	return (0);
 }

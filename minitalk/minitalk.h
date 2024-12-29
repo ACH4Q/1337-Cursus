@@ -6,22 +6,22 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 16:17:37 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/26 09:19:30 by machaq           ###   ########.fr       */
+/*   Updated: 2024/12/29 09:59:40 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 #define MINITALK_H
 
-#include <signal.h>
-#include <unistd.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <signal.h>
 
-void        ft_sender(__pid_t pid, char c);
-void        ft_putchar(char c);
-void        ft_putstr(char *s);
-int         ft_power(int nb, int power);
-void        ft_putnbr(int n);
-int         ft_atoi(const char *str);
+# define NUMBIT 0
+# define PID 1
+# define OTHER_PID 2
 
+void	ft_putnbr(int nb);
+int		ft_atoi(char *str);
 
 #endif
