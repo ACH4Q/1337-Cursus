@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:19:40 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/29 10:37:12 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/01 17:26:47 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #include "minitalk_bonus.h"
 
 
-int	g_ddd = 0;
+int	g_var = 0;
 
 void	handel_kill(void)
 {
@@ -36,7 +36,7 @@ void	handel_kill(void)
 void	handle_ack(int sig)
 {
 	if (sig == SIGUSR1)
-		g_ddd = 1;
+		g_var = 1;
 	else
 		write (1, "\n[ ==> your message has been recieved🙂! <== ]\n\n", 51);
 }
@@ -58,10 +58,10 @@ void	send_mess(int pid, char c)
 			if (kill(pid, SIGUSR2) == -1)
 				handel_kill();
 		}
-		while (g_ddd == 0)
+		while (g_var == 0)
 			pause();
-		usleep(100);
-		g_ddd = 0;
+		usleep(500);
+		g_var = 0;
 		i++;
 	}
 }
