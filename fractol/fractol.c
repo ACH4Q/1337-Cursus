@@ -6,13 +6,17 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:36:38 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/04 16:36:59 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/04 16:44:07 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int main(int ac, char **av)
 {
-    if (ac > 4)
+    if ((ac == 2 && av[1] = "mandalbrot") || (ac == 4 && av[1] = "julia"))
+    {
+        
+    }
+    else 
     {
         write(1,"Usage ./fractol <Julia / Maldrbrot> <real> <imaginary>")
     }
