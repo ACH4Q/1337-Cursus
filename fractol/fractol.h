@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:37:05 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/04 17:02:06 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/07 21:55:18 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ typedef struct t_mlx
     void    *windows;
     void    *connection;
 }   t_fractal;
+
 
 #endif
