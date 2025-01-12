@@ -6,29 +6,53 @@
 /*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:37:05 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/07 21:55:18 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/11 15:18:45 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
-#define FRACTOL_H
+# define FRACTOL_H
 
+# include <mlx.h>
+# include <stdlib.h>
+# include <math.h>
+# include <string.h>
+#include <stdio.h>
 #include <unistd.h>
 
-typedef struct t_image 
-{   
-    int     line;
-    int     *image;
-    char    *pixels
-    int     bits;       
+# define WIDTH 1080
+# define HEIGHT 1920
 
-} t_image;
-
-typedef struct t_mlx
+typedef struct	s_data
 {
-    void    *windows;
-    void    *connection;
-}   t_fractal;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			fractol;
+	int			color;
+	int			width;
+	int			height;
+	double		minreal;
+	double		maxreal;
+	double		min_i;
+	double		max_i;
+	double		cre;
+	double		cim;
+	double		newre;
+	double		newim;
+	double		oldre;
+	double		oldim;
+	double		zoom;
+	double		max_n;
+	int			random;
+}				t_data;
 
+
+void			julia(t_data *data);
+void			julia_init(t_data *data);
+void			zoom_julia(t_data *data, int mousecode);
+int				julia_n(t_data *data);
+void ft_putendl(char *str);
+int keys(int keycode, t_data *data);
+int mouse_hook(int button, int x, int y, t_data *data);
 
 #endif
