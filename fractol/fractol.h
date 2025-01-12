@@ -3,56 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:37:05 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/11 15:18:45 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/12 11:17:38 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <mlx.h>
-# include <stdlib.h>
 # include <math.h>
+# include <mlx.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include <string.h>
-#include <stdio.h>
-#include <unistd.h>
 
-# define WIDTH 1080
-# define HEIGHT 1920
+# define WIDTH 800
+# define HEIGHT 800
 
-typedef struct	s_data
+typedef struct s_data
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	int			fractol;
-	int			color;
-	int			width;
-	int			height;
-	double		minreal;
-	double		maxreal;
-	double		min_i;
-	double		max_i;
-	double		cre;
-	double		cim;
-	double		newre;
-	double		newim;
-	double		oldre;
-	double		oldim;
-	double		zoom;
-	double		max_n;
-	int			random;
-}				t_data;
+    void    *mlx;
+    void    *win;
+    void    *img;
+    char    *addr;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+    double  zoom;
+    double  offset_x;
+    double  offset_y;
+    double  c_re;
+    double  c_im;
+    int     max_iter;
+    int     fractal_type;
+}           t_data;
 
-
-void			julia(t_data *data);
-void			julia_init(t_data *data);
-void			zoom_julia(t_data *data, int mousecode);
-int				julia_n(t_data *data);
-void ft_putendl(char *str);
-int keys(int keycode, t_data *data);
-int mouse_hook(int button, int x, int y, t_data *data);
+void        draw_fractal(t_data *data);
+void        draw_julia(t_data *data);
+void        draw_mandelbrot(t_data *data);
+int         handle_mouse(int button, int x, int y, t_data *data);
+int         handle_key(int keycode, t_data *data);
+void        my_mlx_pixel_put(t_data *data, int x, int y, int color);
+double      map(double value, double min1, double max1, double min2, double max2);
+void        signal_handler(int signum);
+int         close_window(t_data *data);
 
 #endif

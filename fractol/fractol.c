@@ -3,110 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@student.42.fr>              +#+  +:+       +#+        */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:36:38 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/11 15:55:59 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/12 11:22:51 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdio.h>
-#include <string.h>
+#include <signal.h>  // For signal handling
 #include <stdlib.h>
+#include "fractol.h"
 
-int ft_strcmp(const char *s1, const char *s2)
+void initialize_data(t_data *data)
 {
-    size_t i = 0;
-    if (!s1 || !s2)
-        return -1;
-    while (s1[i] || s2[i])
+    data->zoom = 1.0;
+    data->offset_x = 0.0;
+    data->offset_y = 0.0;
+    data->max_iter = 50;
+}
+
+void parse_arguments(int argc, char **argv, t_data *data)
+{
+    if (argc < 2)
     {
-        if (s2[i] != s1[i])
-            return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-        i++;
+        printf("Usage: %s <fractal_type> [parameters]\n", argv[0]);
+        printf("Available fractals: mandelbrot, julia\n");
+        exit(1);
     }
-    return 0;
-}
-
-void show_menu()
-{
-    printf("\n=== Fractol Menu ===\n");
-    printf("Choose a fractal to render:\n");
-    printf("1. mandelbrot\n");
-    printf("2. julia\n");
-    printf("Type the name of the fractal (or 'exit' to quit):\n");
-}
-
-int validate_input(int ac, char **av)
-{
-    if (ac < 2 || !av[1])
+    if (strcmp(argv[1], "mandelbrot") == 0)
     {
-        show_menu();
-        return -1;
-    }
-    if (ft_strcmp(av[1], "julia") == 0 && ac == 4)
-        return 0;
-    if (ft_strcmp(av[1], "mandelbrot") == 0 && ac == 2)
-        return 1;
-
-    show_menu();
-    return -1;
-}
-
-void draw_julia(void *mlx, void *win, double c_re, double c_im) {
-    int x = 0, y = 0;
-
-    while (y < 1080)
-    {
-        x = 0;
-        while (x < 1920)
+        data->fractal_type = 1;
+        if (argc == 4)
         {
-            double z_re = (x - 1920 / 2.0) * 4.0 / 1920;
-            double z_im = (y - 1080 / 2.0) * 4.0 / 1080;
-
-            int iter = 0;
-            while (z_re * z_re + z_im * z_im <= 4 && iter < 100) {
-                double tmp = z_re * z_re - z_im * z_im + c_re;
-                z_im = 2 * z_re * z_im + c_im;
-                z_re = tmp;
-                iter++;
-            }
-            int color = 0x000000;
-            if (iter < 100)
-                color = ( 0xFF0000 * iter / 100);
-            mlx_pixel_put(mlx, win, x, y, color);
-            x++;
+            data->c_re = atof(argv[2]);
+            data->c_im = atof(argv[3]);
         }
-        y++;
+        else
+        {
+            data->c_re = 0;
+            data->c_im = 0;
+        }
+    }
+    else if (strcmp(argv[1], "julia") == 0)
+    {
+        data->fractal_type = 2;
+        if (argc == 4)
+        {
+            data->c_re = atof(argv[2]);
+            data->c_im = atof(argv[3]);
+        }
+        else
+        {
+            data->c_re = -0.7;
+            data->c_im = 0.27015;
+        }
+    }
+    else
+    {
+        printf("Invalid fractal type. Use 'mandelbrot' or 'julia'.\n");
+        exit(1);
     }
 }
 
-void julia(char *str, char *str1) {
-    void *mlx;
-    void *win;
-
-    mlx = mlx_init();
-    win = mlx_new_window(mlx, 1920, 1080, "Julia");
-    double c_re = atof(str);
-    double c_im = atof(str1);
-    draw_julia(mlx, win, c_re, c_im);
-    mlx_loop(mlx);
-}
-
-void mandelbrot()
+int main(int argc, char **argv)
 {
-   
-}
+    t_data data;
 
-int main(int ac, char **av)
-{
-    int result = validate_input(ac, av);
-
-    if (result == 0)
-        julia(av[2], av[3]);
-    else if (result == 1)
-        mandelbrot();
-
-    return 0;
+    data.mlx = mlx_init();
+    data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Fract'ol");
+    data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
+    data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
+    initialize_data(&data);
+    parse_arguments(argc, argv, &data);
+    signal(SIGINT, signal_handler);
+    signal(SIGQUIT, signal_handler);
+    draw_fractal(&data);
+    mlx_key_hook(data.win, handle_key, &data);
+    mlx_mouse_hook(data.win, handle_mouse, &data);
+    mlx_hook(data.win, 17, 0, close_window, &data);
+    mlx_loop(data.mlx);
+    return (0);
 }
