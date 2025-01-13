@@ -6,12 +6,10 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:36:38 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/12 11:22:51 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/13 14:45:28 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>  // For signal handling
-#include <stdlib.h>
 #include "fractol.h"
 
 void initialize_data(t_data *data)

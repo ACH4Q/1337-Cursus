@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:37:05 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/12 11:17:38 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/13 14:46:15 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+#include <signal.h>
 
 # define WIDTH 800
 # define HEIGHT 800

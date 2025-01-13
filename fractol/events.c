@@ -6,13 +6,11 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 10:25:23 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/12 11:27:20 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/13 14:45:57 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <signal.h>
-#include <stdlib.h>
 
 int handle_mouse(int button, int x, int y, t_data *data)
 {
@@ -49,8 +47,8 @@ int handle_key(int keycode, t_data *data)
         data->offset_y -= 0.1 / data->zoom;
     else if (keycode == 125)
         data->offset_y += 0.1 / data->zoom;
-    else if (keycode == 8)  // 'C' key for color shifting
-        data->max_iter += 10;  // Increase iterations for finer color shifts
+    else if (keycode == 8)
+        data->max_iter += 10;
     draw_fractal(data);
     return (0);
 }
@@ -63,6 +61,6 @@ int close_window(t_data *data)
 
 void signal_handler(int signum)
 {
-    if (signum == SIGINT || signum == SIGQUIT)  // SIGINT for Ctrl+C, SIGQUIT for Ctrl+D
+    if (signum == SIGINT || signum == SIGQUIT)
         exit(0);
 }
