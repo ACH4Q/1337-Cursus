@@ -6,61 +6,85 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 10:25:23 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/13 14:45:57 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/20 16:40:31 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int handle_mouse(int button, int x, int y, t_data *data)
+int	handle_mouse(int button, int x, int y, t_data *data)
 {
-    double mouse_re;
-    double mouse_im;
+	double	mouse_re;
+	double	mouse_im;
 
-    mouse_re = map(x, 0, WIDTH, -2.0 / data->zoom + data->offset_x, 2.0 / data->zoom + data->offset_x);
-    mouse_im = map(y, 0, HEIGHT, -2.0 / data->zoom + data->offset_y, 2.0 / data->zoom + data->offset_y);
-    if (button == 4)
-    {
-        data->zoom *= 1.1;
-        data->offset_x += (mouse_re - data->offset_x) * 0.1;
-        data->offset_y += (mouse_im - data->offset_y) * 0.1;
-    }
-    else if (button == 5)
-    {
-        data->zoom /= 1.1;
-        data->offset_x -= (mouse_re - data->offset_x) * 0.1;
-        data->offset_y -= (mouse_im - data->offset_y) * 0.1;
-    }
-    draw_fractal(data);
-    return (0);
+	mouse_re = map(x, (t_range){0, WIDTH}, (t_range){-2.0 / data->zoom
+			+ data->offset_x, 2.0 / data->zoom + data->offset_x});
+	mouse_im = map(y, (t_range){0, HEIGHT}, (t_range){-2.0 / data->zoom
+			+ data->offset_y, 2.0 / data->zoom + data->offset_y});
+	if (button == 4)
+	{
+		data->zoom *= 1.1;
+		data->offset_x += (mouse_re - data->offset_x) * 0.1;
+		data->offset_y += (mouse_im - data->offset_y) * 0.1;
+	}
+	else if (button == 5)
+	{
+		data->zoom /= 1.1;
+		data->offset_x -= (mouse_re - data->offset_x) * 0.1;
+		data->offset_y -= (mouse_im - data->offset_y) * 0.1;
+	}
+	draw_fractal(data);
+	return (0);
 }
 
-int handle_key(int keycode, t_data *data)
+int	handle_key(int keycode, t_data *data)
 {
-    if (keycode == 53)
-        exit(0);
-    else if (keycode == 123)
-        data->offset_x -= 0.1 / data->zoom;
-    else if (keycode == 124)
-        data->offset_x += 0.1 / data->zoom;
-    else if (keycode == 126)
-        data->offset_y -= 0.1 / data->zoom;
-    else if (keycode == 125)
-        data->offset_y += 0.1 / data->zoom;
-    else if (keycode == 8)
-        data->max_iter += 10;
-    draw_fractal(data);
-    return (0);
+	if (keycode == 65307)
+		close_window(data);
+	else if (keycode == 65361)
+		data->offset_x -= 0.1 / data->zoom;
+	else if (keycode == 65363)
+		data->offset_x += 0.1 / data->zoom;
+	else if (keycode == 65364)
+		data->offset_y -= 0.1 / data->zoom;
+	else if (keycode == 65362)
+		data->offset_y += 0.1 / data->zoom;
+	else if (keycode == 32)
+		data->max_iter += 10;
+	draw_fractal(data);
+	return (0);
 }
 
-int close_window(t_data *data)
+int	close_window(t_data *data)
 {
-    mlx_destroy_window(data->mlx, data->win);
-    exit(0);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->img);
+	mlx_destroy_display(data->mlx);
+	exit(0);
 }
 
-void signal_handler(int signum)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-    if (signum == SIGINT || signum == SIGQUIT)
-        exit(0);
+	int	i;
+
+	i = -1;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+void	draw_fractal(t_data *data)
+{
+	if (data->fractal_type == 1) 
+		draw_mandelbrot(data);
+	else if (data->fractal_type == 2)
+		draw_julia(data);
+	else if (data->fractal_type == 3)
+		draw_burning_ship(data);
+	else
+		printf("Invalid fractal type. Unable to draw.\n");
 }

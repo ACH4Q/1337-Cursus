@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:37:05 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/13 14:46:15 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/19 20:01:00 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,58 @@
 
 # include <math.h>
 # include <mlx.h>
-# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-#include <signal.h>
 
 # define WIDTH 800
 # define HEIGHT 800
 
-typedef struct s_data
+typedef struct s_complex
 {
-    void    *mlx;
-    void    *win;
-    void    *img;
-    char    *addr;
-    int     bits_per_pixel;
-    int     line_length;
-    int     endian;
-    double  zoom;
-    double  offset_x;
-    double  offset_y;
-    double  c_re;
-    double  c_im;
-    int     max_iter;
-    int     fractal_type;
-}           t_data;
+	double	re;
+	double	im;
+}			t_complex;
 
-void        draw_fractal(t_data *data);
-void        draw_julia(t_data *data);
-void        draw_mandelbrot(t_data *data);
-int         handle_mouse(int button, int x, int y, t_data *data);
-int         handle_key(int keycode, t_data *data);
-void        my_mlx_pixel_put(t_data *data, int x, int y, int color);
-double      map(double value, double min1, double max1, double min2, double max2);
-void        signal_handler(int signum);
-int         close_window(t_data *data);
+typedef struct s_data {
+    void *mlx;
+    void *win;
+    void *img;
+    char *addr;
+    int bits_per_pixel;
+    int line_length;
+    int endian;
+    double zoom;
+    double offset_x;
+    double offset_y;
+    double c_re;
+    double c_im;
+    int max_iter;
+    int fractal_type;
+} t_data;
+
+typedef struct s_range
+{
+    double  min;
+    double  max;
+}   t_range;
+
+void draw_fractal(t_data *data);
+void draw_julia(t_data *data);
+void draw_mandelbrot(t_data *data);
+void draw_burning_ship(t_data *data);
+
+
+void my_mlx_pixel_put(t_data *data, int x, int y, int color);
+double	map(double value, t_range from, t_range to);
+double ft_atof(const char *str);
+int ft_strcmp(const char *s1, const char *s2);
+
+
+int handle_mouse(int button, int x, int y, t_data *data);
+int handle_key(int keycode, t_data *data);
+int close_window(t_data *data);
+double doubles(char *str,char *str1);
+void	initialize_data(t_data *data);
 
 #endif
