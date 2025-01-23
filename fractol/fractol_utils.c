@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 09:53:33 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/19 14:06:33 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/23 10:00:13 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ double	ft_atof(const char *str)
 
 	i = 0;
 	sign = 1;
+	if (!(str[i] >= '0' && str[i] <= '9') && !(str[i] == '+' && str[i] == '-'))
+		exit (0);
 	if (str[i] == '-')
 	{
 		sign = -1;
@@ -79,5 +81,7 @@ double	ft_atof(const char *str)
 	}
 	result = parse_integer(str, &i);
 	fraction = parse_fraction(str, &i);
+	if (result != '\0' || fraction != '\0')
+		exit (0);
 	return (sign * (result + fraction));
 }

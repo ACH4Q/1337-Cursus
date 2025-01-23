@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:37:05 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/19 20:01:00 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/22 22:19:35 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,32 @@
 
 typedef struct s_complex
 {
-	double	re;
-	double	im;
-}			t_complex;
+double re;
+double im;
+} t_complex;
 
 typedef struct s_data {
-    void *mlx;
-    void *win;
-    void *img;
-    char *addr;
-    int bits_per_pixel;
-    int line_length;
-    int endian;
-    double zoom;
-    double offset_x;
-    double offset_y;
-    double c_re;
-    double c_im;
-    int max_iter;
-    int fractal_type;
+void *mlx;
+void *win;
+void *img;
+char *addr;
+int bits_per_pixel;
+int line_length;
+int endian;
+double zoom;
+double offset_x;
+double offset_y;
+double c_re;
+double c_im;
+int max_iter;
+int fractal_type;
 } t_data;
 
 typedef struct s_range
 {
-    double  min;
-    double  max;
-}   t_range;
+double min;
+double max;
+} t_range;
 
 void draw_fractal(t_data *data);
 void draw_julia(t_data *data);
@@ -58,7 +58,7 @@ void draw_burning_ship(t_data *data);
 
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
-double	map(double value, t_range from, t_range to);
+double map(double value, t_range from, t_range to);
 double ft_atof(const char *str);
 int ft_strcmp(const char *s1, const char *s2);
 
@@ -67,6 +67,6 @@ int handle_mouse(int button, int x, int y, t_data *data);
 int handle_key(int keycode, t_data *data);
 int close_window(t_data *data);
 double doubles(char *str,char *str1);
-void	initialize_data(t_data *data);
+void initialize_data(t_data *data);
 
 #endif

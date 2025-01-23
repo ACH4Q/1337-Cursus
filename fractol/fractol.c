@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:36:38 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/19 12:35:41 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/23 00:05:48 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	parse_arguments(int argc, char **argv, t_data *data)
 		printf("Available fractals: mandelbrot, julia, burning_ship\n");
 		exit(1);
 	}
-	if (ft_strcmp(argv[1], "mandelbrot") == 0 && argc == 2)
+	else if (ft_strcmp(argv[1], "mandelbrot") == 0 && argc == 2)
 	{
 		parsing_mandelbrot(data);
 	}

@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 10:25:23 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/20 16:40:31 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/23 00:33:28 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,26 @@ int	handle_key(int keycode, t_data *data)
 
 int	close_window(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_image(data->mlx, data->img);
+	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 	exit(0);
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
-
-	i = -1;
-	while (s1[i] && s2[i])
+	while (*s1 && *s1 == *s2)
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		s1++;
+		s2++;
 	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
 void	draw_fractal(t_data *data)
 {
-	if (data->fractal_type == 1) 
+	if (data->fractal_type == 1)
 		draw_mandelbrot(data);
 	else if (data->fractal_type == 2)
 		draw_julia(data);
