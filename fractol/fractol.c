@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:36:38 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/23 13:49:48 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/23 16:46:07 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ void	parsing_julia(t_data *data, int argc, char **argv)
 		data->c_re = ft_atof(argv[2]);
 		data->c_im = ft_atof(argv[3]);
 	}
-	else
+	else if (argc == 2)
 	{
 		data->c_re = -0.7;
 		data->c_im = 0.27015;
 	}
+	else
+		exit (1);
 }
 
 void	parsing_burning_ship(t_data *data)
@@ -43,8 +45,8 @@ void	parse_arguments(int argc, char **argv, t_data *data)
 {
 	if (argc < 2 || argc > 4)
 	{
-		write(1,"Usage: ./fractol <fractal_type> [parameters]\n",46);
-		write(1,"Available fractals: mandelbrot, julia, .burning_ship\n",54);
+		ft_printf("Usage: ./fractol <fractal_type> [parameters]\n");
+		ft_printf("Available fractals: mandelbrot, julia, burning_ship\n");
 		exit(1);
 	}
 	else if (ft_strcmp(argv[1], "mandelbrot") == 0 && argc == 2)

@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:37:05 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/22 22:19:35 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/23 14:06:24 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <string.h>
+#include "ft_printf/ft_printf.h"
+
 
 # define WIDTH 800
 # define HEIGHT 800
