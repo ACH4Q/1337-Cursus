@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:36:38 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/23 00:05:48 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/23 13:49:48 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	parse_arguments(int argc, char **argv, t_data *data)
 {
 	if (argc < 2 || argc > 4)
 	{
-		printf("Usage: ./fractol <fractal_type> [parameters]\n");
-		printf("Available fractals: mandelbrot, julia, burning_ship\n");
+		write(1,"Usage: ./fractol <fractal_type> [parameters]\n",46);
+		write(1,"Available fractals: mandelbrot, julia, .burning_ship\n",54);
 		exit(1);
 	}
 	else if (ft_strcmp(argv[1], "mandelbrot") == 0 && argc == 2)

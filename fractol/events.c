@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 10:25:23 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/23 00:33:28 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/23 13:50:16 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ void	draw_fractal(t_data *data)
 	else if (data->fractal_type == 3)
 		draw_burning_ship(data);
 	else
-		printf("Invalid fractal type. Unable to draw.\n");
+		write(1,"Invalid fractal type. Unable to draw.\n",39);
 }
