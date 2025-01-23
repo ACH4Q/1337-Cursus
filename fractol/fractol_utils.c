@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 09:53:33 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/23 10:00:13 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/23 13:03:40 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static double	parse_integer(const char *str, int *i)
 	double	result;
 
 	result = 0.0;
+	if (!(*str >= '0' && *str <= '9') && *str != '+' && *str != '-')
+		exit (1);
 	while (str[*i] >= '0' && str[*i] <= '9')
 	{
 		result = result * 10 + (str[*i] - '0');
@@ -50,6 +52,8 @@ static double	parse_fraction(const char *str, int *i)
 
 	fraction = 0.0;
 	divider = 10.0;
+	if (!(*str >= '0' && *str <= '9') && *str != '+' && *str != '-')
+		exit (1);
 	if (str[*i] == '.')
 	{
 		(*i)++;
@@ -69,19 +73,25 @@ double	ft_atof(const char *str)
 	int		sign;
 	double	result;
 	double	fraction;
+	double	final;
 
 	i = 0;
 	sign = 1;
-	if (!(str[i] >= '0' && str[i] <= '9') && !(str[i] == '+' && str[i] == '-'))
-		exit (0);
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+		i++;
+	if (!(str[i] >= '0' && str[i] <= '9') && str[i] != '+' && str[i] != '-')
+		exit (1);
 	if (str[i] == '-')
 	{
 		sign = -1;
 		i++;
 	}
+	else if (str[i] == '+')
+		i++;
 	result = parse_integer(str, &i);
 	fraction = parse_fraction(str, &i);
-	if (result != '\0' || fraction != '\0')
-		exit (0);
-	return (sign * (result + fraction));
+	final = sign * (result + fraction);
+	if (str[i] != '\0' || final < -2.0 || final > 2.0)
+		exit (1);
+	return (final);
 }
