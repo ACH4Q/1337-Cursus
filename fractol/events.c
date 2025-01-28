@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 10:25:23 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/23 13:59:00 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/24 15:47:50 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	handle_key(int keycode, t_data *data)
 		data->offset_x -= 0.1 / data->zoom;
 	else if (keycode == 65363)
 		data->offset_x += 0.1 / data->zoom;
-	else if (keycode == 65364)
-		data->offset_y -= 0.1 / data->zoom;
 	else if (keycode == 65362)
+		data->offset_y -= 0.1 / data->zoom;
+	else if (keycode == 65364)
 		data->offset_y += 0.1 / data->zoom;
 	else if (keycode == 32)
 		data->max_iter += 10;

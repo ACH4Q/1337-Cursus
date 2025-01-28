@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 09:53:46 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/19 13:06:34 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/27 15:44:20 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,23 @@ void	draw_julia(t_data *data)
 		y++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+}
+
+int	check_sign(const char *str, int *i)
+{
+	int	sign;
+
+	sign = 1;
+	if (str[*i] == '-')
+	{
+		sign = -1;
+		(*i)++;
+	}
+	else if (str[*i] == '+')
+	{
+		(*i)++;
+	}
+	if (!(str[*i] >= '0' && str[*i] <= '9'))
+		exit(1);
+	return (sign);
 }

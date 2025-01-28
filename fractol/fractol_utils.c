@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 09:53:33 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/23 16:43:44 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/26 10:11:02 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static double	parse_integer(const char *str, int *i)
 
 	result = 0.0;
 	if (!(*str >= '0' && *str <= '9') && *str != '+' && *str != '-')
-		exit (1);
+		exit(1);
 	while (str[*i] >= '0' && str[*i] <= '9')
 	{
 		result = result * 10 + (str[*i] - '0');
@@ -53,7 +53,7 @@ static double	parse_fraction(const char *str, int *i)
 	fraction = 0.0;
 	divider = 10.0;
 	if (!(*str >= '0' && *str <= '9') && *str != '+' && *str != '-')
-		exit (1);
+		exit(1);
 	if (str[*i] == '.')
 	{
 		(*i)++;
@@ -80,18 +80,12 @@ double	ft_atof(const char *str)
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
 		i++;
 	if (!(str[i] >= '0' && str[i] <= '9') && str[i] != '+' && str[i] != '-')
-		exit (1);
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	else if (str[i] == '+')
-		i++;
+		exit(1);
+	sign = check_sign(str, &i);
 	result = parse_integer(str, &i);
 	fraction = parse_fraction(str, &i);
 	final = sign * (result + fraction);
 	if (str[i] != '\0' || final < -2.0 || final > 2.0)
-		exit (1);
+		exit(1);
 	return (final);
 }

@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:52:50 by machaq            #+#    #+#             */
-/*   Updated: 2025/01/22 22:20:41 by machaq           ###   ########.fr       */
+/*   Updated: 2025/01/26 10:11:38 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int	burning_ship_iterations(double c_re, double c_im, int max_iter)
 	iter = 0;
 	while ((z_re * z_re + z_im * z_im <= 4) && (iter < max_iter))
 	{
-		z_re = fabs(z_re);
-		z_im = fabs(z_im);
+		z_re = ft_fabs(z_re);
+		z_im = ft_fabs(z_im);
 		tmp = z_re * z_re - z_im * z_im + c_re;
 		z_im = 2 * z_re * z_im + c_im;
 		z_re = tmp;
@@ -82,4 +82,11 @@ void	initialize_data(t_data *data)
 	data->offset_x = 0.0;
 	data->offset_y = 0.0;
 	data->max_iter = 50;
+}
+
+double	ft_fabs(double x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
 }
