@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_printunsnb.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 17:28:49 by machaq            #+#    #+#             */
-/*   Updated: 2025/02/02 17:28:59 by machaq           ###   ########.fr       */
+/*   Created: 2024/11/30 16:07:33 by machaq            #+#    #+#             */
+/*   Updated: 2024/12/03 22:10:54 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-int is_valid_input(char *str)
+int	ft_printunsnb(unsigned int i)
 {
-    int i = 0;
-    if (str[i] == '-' || str[i] == '+')
-        i++;
-    while (str[i])
-    {
-        if (!isdigit(str[i]))
-            return (0);
-        i++;
-    }
-    return (1);
-}
+	int	len;
 
-void error_exit(void)
-{
-    write(2, "Error\n", 6);
-    exit(EXIT_FAILURE);
+	len = 0;
+	if (i == 0)
+	{
+		ft_putchar('0');
+		return (1);
+	}
+	if (i >= 10)
+		len += ft_printunsnb(i / 10);
+	len += ft_putchar((i % 10) + '0');
+	return (len);
 }

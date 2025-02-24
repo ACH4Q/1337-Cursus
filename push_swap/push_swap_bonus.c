@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhaddou <mhaddou@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mhaddou <mhaddou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:14:33 by mhaddou           #+#    #+#             */
-/*   Updated: 2025/02/03 16:33:15 by mhaddou          ###   ########.fr       */
+/*   Updated: 2025/02/01 20:49:08 by mhaddou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	dup_checker(int *arr, int len_arr)
+int	dup_checker_bonus(int *arr, int len_arr)
 {
 	int (index), (jndex);
 	jndex = 0;
@@ -27,10 +27,10 @@ int	dup_checker(int *arr, int len_arr)
 		}
 		index++;
 	}
-	return (put_on_sa(arr, len_arr), 0);
+	return (do_instra(arr, len_arr), 0);
 }
 
-int	spt_to_arr(char ***str, int ac, int str_num)
+int	spt_to_arr_bonus(char ***str, int ac, int str_num)
 {
 	long	val;
 
@@ -52,7 +52,7 @@ int	spt_to_arr(char ***str, int ac, int str_num)
 		}
 		ac_i++;
 	}
-	dup_checker(arr, len_arr);
+	dup_checker_bonus(arr, len_arr);
 	return (free(arr), arr = NULL, 1);
 }
 
@@ -76,6 +76,6 @@ int	main(int ac, char **av)
 		return (1);
 	while (i < ac)
 		str[i_i++] = ft_split(av[i++], ' ');
-	spt_to_arr(str, ac, str_num);
+	spt_to_arr_bonus(str, ac, str_num);
 	return (ft_free_sp(str, ac), 0);
 }
