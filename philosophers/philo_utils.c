@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:45:10 by machaq            #+#    #+#             */
-/*   Updated: 2025/03/05 17:54:32 by machaq           ###   ########.fr       */
+/*   Updated: 2025/03/11 01:16:56 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,38 @@ int	ft_atoi(char *str)
 	if (str[i] != '\0')
 		return (-1337);
 	return (sign * result);
+}
+
+t_ul	get_time(void)
+{
+	struct timeval	t;
+	t_ul			msc;
+
+	gettimeofday(&t, NULL);
+	msc = t.tv_sec * 1000 + t.tv_usec / 1000;
+	return (msc);
+}
+
+int	_usleep(t_ul _sleep)
+{
+	t_ul	start;
+
+	start = get_time();
+	while (get_time() - start < _sleep)
+		usleep(200);
+	return (0);
+}
+
+void	write_locker(char *s, t_philo *philo)
+{
+	pthread_mutex_lock(&philo->all->write);
+	printf("%lu %d %s\n", get_time() - philo->all->s_time, philo->id + 1, s);
+	pthread_mutex_unlock(&philo->all->write);
+}
+
+void	philo_free(t_philo *philo)
+{
+	free(philo->all->mutex);
+	free(philo->all);
+	free(philo);
 }
