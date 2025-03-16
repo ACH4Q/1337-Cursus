@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 01:08:22 by machaq            #+#    #+#             */
-/*   Updated: 2025/03/15 03:57:33 by machaq           ###   ########.fr       */
+/*   Updated: 2025/03/16 13:32:45 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				free_resources(t_table *table);
 int				start_routines(t_table *table);
 int				ft_error(int error);
 int				status_print(t_philo *philo, char *str, int print_death);
-int				parsing_args(int argv, char **argc, t_table *table);
+int				parsing_args(int ac, char **av, t_table *table);
 long long		timestamp(void);
 unsigned int	real_time(long long time);
 void			philo_sleep(long long time);

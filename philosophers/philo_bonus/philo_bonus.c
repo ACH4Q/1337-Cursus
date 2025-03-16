@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:53:04 by machaq            #+#    #+#             */
-/*   Updated: 2025/03/15 03:59:28 by machaq           ###   ########.fr       */
+/*   Updated: 2025/03/16 12:15:05 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int	init_resources(t_table *table)
 	return (0);
 }
 
-int	main(int argv, char **argc)
+int	main(int ac, char **av)
 {
 	t_table	table;
 	int		error;
 
-	if (parsing_args(argv, argc, &table))
+	if (parsing_args(ac, av, &table))
 		return (ft_error(EINVAL));
 	error = init_resources(&table);
 	if (error)

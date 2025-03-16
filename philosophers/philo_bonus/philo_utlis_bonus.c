@@ -6,7 +6,7 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:53:12 by machaq            #+#    #+#             */
-/*   Updated: 2025/03/15 03:58:15 by machaq           ###   ########.fr       */
+/*   Updated: 2025/03/16 12:15:59 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ static int	ft_atoi(const char *str, int *value)
 	return (0);
 }
 
-int	parsing_args(int argv, char **argc, t_table *table)
+int	parsing_args(int ac, char **av, t_table *table)
 {
-	if (argv < 5)
+	if (ac < 5)
 		return (EINVAL);
-	if (ft_atoi(argc[1], &table->num_philos) || ft_atoi(argc[2],
-			&table->data.time_to_die) || ft_atoi(argc[3],
-			&table->data.time_to_eat) || ft_atoi(argc[4],
+	if (ft_atoi(av[1], &table->num_philos) || ft_atoi(av[2],
+			&table->data.time_to_die) || ft_atoi(av[3],
+			&table->data.time_to_eat) || ft_atoi(av[4],
 			&table->data.time_to_sleep))
 		return (EINVAL);
 	table->data.number_time_eats = -1;
-	if (argv == 6)
+	if (ac == 6)
 	{
-		if (ft_atoi(argc[5], &table->data.number_time_eats))
+		if (ft_atoi(av[5], &table->data.number_time_eats))
 			return (EINVAL);
 	}
 	if (table->num_philos < 1)
