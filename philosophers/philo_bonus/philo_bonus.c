@@ -6,77 +6,84 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:53:04 by machaq            #+#    #+#             */
-/*   Updated: 2025/03/16 12:15:05 by machaq           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:39:07 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	init_semaphores(t_table *table)
+int	main(int ac, char **av)
 {
-	sem_unlink("sem_print");
-	sem_unlink("sem_fork");
-	table->data.sem_print = sem_open("sem_print", O_CREAT | O_EXCL, 0644, 1);
-	if (table->data.sem_print == SEM_FAILED)
-		return (errno);
-	table->data.sem_fork = sem_open("sem_fork", O_CREAT | O_EXCL, 0644,
-			table->num_philos);
-	if (table->data.sem_fork == SEM_FAILED)
-		return (errno);
+	t_process	*philos;
+	t_data		data;
+
+	if (!initialize_simulation(ac, av, &philos, &data))
+		return (0);
+	if (!create_processes(philos))
+	{
+		kill_processes(philos);
+		cleanup(philos, &data);
+		return (1);
+	}
+	if (philos->data->option_arg == -1)
+	{
+		while (1)
+		{
+			if (data.alive->__align == 0)
+				break ;
+		}
+	}
+	else
+		wait_for_processes(&data);
+	kill_processes(philos);
+	cleanup(philos, &data);
 	return (0);
 }
 
-int	init_philos(t_table *table)
+void	wait_for_processes(t_data *data)
+{
+	while (1)
+	{
+		if (data->count->__align == 0)
+			break ;
+	}
+}
+
+void	kill_processes(t_process *philo)
 {
 	int	i;
 
-	table->philos = malloc(sizeof(t_philo) * table->num_philos);
-	if (table->philos == NULL)
-		return (ENOMEM);
-	i = -1;
-	while (++i < table->num_philos)
+	i = 0;
+	while (i < philo->data->number)
 	{
-		table->philos[i].num_philo = i + 1;
-		table->data.dead = 0;
-		table->philos[i].num_eats = 0;
-		table->philos[i].data = &table->data;
+		if (philo[i].id > 0)
+		{
+			kill(philo[i].id, SIGKILL);
+		}
+		i++;
 	}
-	return (0);
 }
 
-int	free_resources(t_table *table)
+int	create_processes(t_process *philos)
 {
-	sem_close(table->data.sem_fork);
-	sem_close(table->data.sem_print);
-	free(table->philos);
-	return (0);
-}
+	int	i;
+	int	number;
 
-int	init_resources(t_table *table)
-{
-	int	error;
-
-	error = init_semaphores(table);
-	if (error)
-		return (error);
-	error = init_philos(table);
-	if (error)
-		return (error);
-	return (0);
-}
-
-int	main(int ac, char **av)
-{
-	t_table	table;
-	int		error;
-
-	if (parsing_args(ac, av, &table))
-		return (ft_error(EINVAL));
-	error = init_resources(&table);
-	if (error)
-		return (ft_error(error));
-	error = start_routines(&table);
-	if (error)
-		return (ft_error(error));
-	return (free_resources(&table));
+	number = philos->data->number;
+	i = 0;
+	gettimeofday(&philos[i].data->start, NULL);
+	while (i < number)
+	{
+		philos[i].id = fork();
+		if (philos[i].id < 0)
+			return (0);
+		if (philos[i].id == 0)
+		{
+			simulation(&philos[i]);
+			cleanup_child(&philos[i]);
+			exit(0);
+		}
+		i++;
+	}
+	return (1);
 }

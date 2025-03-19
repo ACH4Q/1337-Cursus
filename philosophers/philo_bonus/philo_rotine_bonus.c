@@ -6,101 +6,66 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 00:53:10 by machaq            #+#    #+#             */
-/*   Updated: 2025/03/15 03:59:47 by machaq           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:12:57 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	*philo_death_supervisor(void *params)
+void	taken_fork(t_process *philo)
 {
-	t_philo		*philo;
-	long long	time;
+	t_time	end;
+	t_time	start;
 
-	philo = (t_philo *)params;
-	while (!philo->data->dead)
-	{
-		time = real_time(philo->last_meal);
-		if (time > philo->data->time_to_die)
-		{
-			philo->data->dead = 1;
-			status_print(philo, "died", 1);
-			exit(1);
-		}
-		usleep(500);
-	}
-	exit(0);
+	start = philo->data->start;
+	sem_wait(philo->data->mutex_fork);
+	sem_wait(philo->data->forks);
+	sem_wait(philo->data->forks);
+	sem_post(philo->data->mutex_fork);
+	sem_wait(philo->data->lock);
+	gettimeofday(&end, NULL);
+	printf("%ld %d has taken a fork\n", set_time(start, end), philo->index);
+	printf("%ld %d has taken a fork\n", set_time(start, end), philo->index);
+	sem_post(philo->data->lock);
 }
 
-void	philo_eats(t_philo *philo)
+void	eating(t_process *philo)
 {
-	sem_wait(philo->data->sem_fork);
-	status_print(philo, "has taken a fork", 0);
-	sem_wait(philo->data->sem_fork);
-	status_print(philo, "has taken a fork", 0);
-	status_print(philo, "is eating", 0);
-	philo->last_meal = timestamp();
-	philo_sleep(philo->data->time_to_eat);
-	philo->num_eats++;
-	sem_post(philo->data->sem_fork);
-	sem_post(philo->data->sem_fork);
+	t_time	end;
+	t_time	start;
+
+	start = philo->data->start;
+	sem_wait(philo->data->lock);
+	gettimeofday(&end, NULL);
+	printf("%ld %d is eating\n", set_time(start, end), philo->index);
+	gettimeofday(&philo->last_meal_time, NULL);
+	sem_post(philo->data->lock);
+	usleep(1000 * philo->data->eat);
+	sem_post(philo->data->forks);
+	sem_post(philo->data->forks);
 }
 
-int	philo_routine(t_philo *philo)
+void	sleeping(t_process *philo)
 {
-	pthread_t	id_supervisor;
+	t_time	end;
+	t_time	start;
 
-	pthread_create(&id_supervisor, NULL, philo_death_supervisor, philo);
-	philo->last_meal = timestamp();
-	while (!philo->data->dead)
-	{
-		philo_eats(philo);
-		status_print(philo, "is sleeping", 0);
-		philo_sleep(philo->data->time_to_sleep);
-		status_print(philo, "is thinking", 0);
-		if (philo->data->number_time_eats >= 0
-			&& philo->num_eats >= philo->data->number_time_eats)
-			exit(0);
-	}
-	pthread_join(id_supervisor, NULL);
-	exit(0);
+	start = philo->data->start;
+	sem_wait(philo->data->lock);
+	gettimeofday(&end, NULL);
+	printf("%ld %d is sleeping\n", set_time(start, end), philo->index);
+	sem_post(philo->data->lock);
+	usleep(1000 * philo->data->sleep);
 }
 
-int	stop_routines(t_table *table)
+void	thinking(t_process *philo)
 {
-	int	status;
-	int	i;
+	t_time	end;
+	t_time	start;
 
-	i = -1;
-	while (++i < table->num_philos)
-	{
-		waitpid(-1, &status, 0);
-		if (status != 0)
-		{
-			i = -1;
-			while (++i < table->num_philos)
-				kill(table->philos[i].pid, SIGKILL);
-			return (0);
-		}
-	}
-	return (0);
-}
-
-int	start_routines(t_table *table)
-{
-	int	i;
-
-	i = -1;
-	table->data.start_time = timestamp();
-	while (++i < table->num_philos)
-	{
-		table->philos[i].pid = fork();
-		if (table->philos[i].pid == 0)
-			philo_routine(&table->philos[i]);
-		else if (table->philos[i].pid < 0)
-			return (1);
-		usleep(100);
-	}
-	stop_routines(table);
-	return (0);
+	start = philo->data->start;
+	sem_wait(philo->data->lock);
+	gettimeofday(&end, NULL);
+	printf("%ld %d is thinking\n", set_time(start, end), philo->index);
+	sem_post(philo->data->lock);
 }

@@ -6,57 +6,57 @@
 /*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 01:55:04 by machaq            #+#    #+#             */
-/*   Updated: 2025/03/15 04:00:55 by machaq           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:13:24 by machaq           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-long long	timestamp(void)
+void	simulation(t_process *philo)
 {
-	struct timeval	time;
-	unsigned long	l;
-	unsigned long	s;
-	unsigned long	u;
-
-	gettimeofday(&time, NULL);
-	s = (time.tv_sec * 1000);
-	u = (time.tv_usec / 1000);
-	l = s + u;
-	return (l);
+	if (philo->data->option_arg == 0)
+	{
+		sem_wait(philo->data->count);
+		return ;
+	}
+	if (philo->data->number == 1)
+		one_philo(philo, philo->data->start);
+	gettimeofday(&philo->last_meal_time, NULL);
+	pthread_create(&philo->monitor, NULL, (void *)(*monitor), (void *)philo);
+	if (philo->data->option_arg == -1)
+		simulation_1(philo);
+	else
+		simulation_2(philo);
+	pthread_join(philo->monitor, NULL);
 }
 
-unsigned int	real_time(long long time)
+void	simulation_1(t_process *philo)
 {
-	long long	now;
-
-	now = timestamp();
-	return ((unsigned int)(now - time));
-}
-
-void	philo_sleep(long long time)
-{
-	long long	init_time;
-
-	init_time = timestamp();
 	while (1)
 	{
-		if ((timestamp() - init_time) >= time)
-			break ;
-		usleep(600);
+		taken_fork(philo);
+		eating(philo);
+		sleeping(philo);
+		thinking(philo);
 	}
 }
 
-int	status_print(t_philo *philo, char *str, int print_death)
+void	simulation_2(t_process *philo)
 {
-	if (sem_wait(philo->data->sem_print))
-		return (errno);
-	if (printf("%04u Philo %03d %s\n", real_time(philo->data->start_time),
-			philo->num_philo, str) < 0)
-		return (EIO);
-	if (print_death == 1)
-		return (0);
-	if (sem_post(philo->data->sem_print))
-		return (errno);
-	return (0);
+	while (1)
+	{
+		taken_fork(philo);
+		eating(philo);
+		sem_wait(philo->data->lock);
+		philo->number_eat++;
+		if (philo->number_eat == philo->data->option_arg)
+		{
+			sem_wait(philo->data->count);
+			sem_post(philo->data->lock);
+			break ;
+		}
+		sem_post(philo->data->lock);
+		sleeping(philo);
+		thinking(philo);
+	}
 }
