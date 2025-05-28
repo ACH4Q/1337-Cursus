@@ -1,0 +1,651 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ckeck_arg.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:39:45 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/19 19:39:47 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "header.h"
+
+int	not_number(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (s[i] == '+')
+		i++;
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+		{
+			write(2, "error in: ", 11);
+			write(2, s, ft_strlen(s));
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	check_arg(char **av)
+{
+	int	i;
+
+	i = 1;
+	while (av[i])
+	{
+		if (not_number(av[i]))
+		{
+			return (1);
+		}
+		else if (ft_atoi(av[i]) == 21474836479)
+		{
+			printf("error: '%s'\n", av[i]);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   creat_philo.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:39:48 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/19 19:39:49 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "header.h"
+
+t_fork	*creat_fork(int i)
+{
+	t_fork	*fork;
+
+	fork = ft_calloc(1, sizeof(t_fork));
+	fork->id = i;
+	mutex_init(&(fork->fork));
+	return (fork);
+}
+
+void	creat_fork_list(t_box *thread)
+{
+	t_fork	*fork;
+	int		i;
+
+	i = 1;
+	fork = creat_fork(i);
+	thread->fork = fork;
+	while (i < thread->number_of_philo)
+	{
+		i++;
+		fork->next = creat_fork(i);
+		fork = fork->next;
+	}
+	fork->next = thread->fork;
+}
+
+void	init_philo(t_box *thread, char **av)
+{
+	thread->number_of_philo = ft_atoi(av[1]);
+	thread->time_to_die = ft_atoi(av[2]);
+	thread->time_to_eat = ft_atoi(av[3]);
+	thread->time_to_sleep = ft_atoi(av[4]);
+	if (av[5])
+		thread->number_looping = ft_atoi(av[5]);
+	else
+		thread->number_looping = -1;
+	creat_fork_list(thread);
+	mutex_init(&(thread->write));
+	mutex_init(&(thread->check_stop));
+	mutex_init(&(thread->mutex_die));
+	pthread_mutex_init(&(thread->check_last), NULL);
+	thread->start = 0;
+	thread->stop = 0;
+	thread->someone_die = 0;
+}
+
+void	creat_philo(char **av)
+{
+	t_box	box;
+	t_philo	*thread;
+	int		i;
+
+	init_philo(&box, av);
+	thread = malloc(box.number_of_philo * sizeof(t_philo));
+	box.start = get_time();
+	launch_philo(&box, thread);
+	wait_philo(&box, thread);
+	i = 0;
+	while (i < box.number_of_philo)
+		pthread_join(thread[i++].thread, NULL);
+	free_all(&box, thread);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   function_philo.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:39:59 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/19 19:40:01 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "header.h"
+
+void	take_fork_(t_philo *tph)
+{
+	ft_lock(&(tph->r_fork->fork));
+	ft_lock(&(tph->box->write));
+	if (check(tph->box))
+		printf("%ld %d  has taken a fork\n", get_time() - tph->box->start,
+			tph->id);
+	unlock(&(tph->box->write));
+	ft_lock(&(tph->l_fork->fork));
+	ft_lock(&(tph->box->write));
+	if (check(tph->box))
+		printf("%ld %d  has taken a fork\n", get_time() - tph->box->start,
+			tph->id);
+	unlock(&(tph->box->write));
+}
+
+void	take_fork(t_philo *tph)
+{
+	if (tph->l_fork->id < tph->r_fork->id)
+	{
+		ft_lock(&(tph->l_fork->fork));
+		ft_lock(&(tph->box->write));
+		if (check(tph->box))
+			printf("%ld %d  has taken a fork\n", get_time() - tph->box->start,
+				tph->id);
+		unlock(&(tph->box->write));
+		ft_lock(&(tph->r_fork->fork));
+		ft_lock(&(tph->box->write));
+		if (check(tph->box))
+			printf("%ld %d  has taken a fork\n", get_time() - tph->box->start,
+				tph->id);
+		unlock(&(tph->box->write));
+	}
+	else
+		take_fork_(tph);
+}
+
+void	write_eat(t_philo *tph)
+{
+	ft_lock(&(tph->box->write));
+	if (check(tph->box))
+		printf("%ld %d is eating\n", tph->last_eat - tph->box->start, tph->id);
+	unlock(&(tph->box->write));
+	ft_sleep(tph, tph->box->time_to_eat);
+	if (tph->l_fork->id < tph->r_fork->id)
+	{
+		unlock(&(tph->l_fork->fork));
+		unlock(&(tph->r_fork->fork));
+	}
+	else
+	{
+		unlock(&(tph->r_fork->fork));
+		unlock(&(tph->l_fork->fork));
+	}
+}
+
+void	write_sleep(t_philo *tph)
+{
+	ft_lock(&(tph->box->write));
+	if (check(tph->box))
+		printf("%ld %d is sleeping\n", get_time() - tph->box->start, tph->id);
+	unlock(&(tph->box->write));
+	ft_sleep(tph, tph->box->time_to_sleep);
+	ft_lock(&(tph->box->write));
+	if (check(tph->box))
+		printf("%ld %d is thinking\n", get_time() - tph->box->start, tph->id);
+	unlock(&(tph->box->write));
+	usleep(500);
+}
+
+void	*thread_philo(void *arg)
+{
+	t_philo	*thread;
+	int		i;
+
+	i = 0;
+	thread = (t_philo *)arg;
+	if (thread->id % 2)
+		usleep(500);
+	while (i != thread->box->number_looping)
+	{
+		take_fork(thread);
+		ft_lock(&(thread->box->check_last));
+		thread->last_eat = get_time();
+		unlock(&(thread->box->check_last));
+		write_eat(thread);
+		write_sleep(thread);
+		if (for25line(thread->box))
+			break ;
+		i++;
+	}
+	ft_lock(&(thread->box->check_stop));
+	thread->box->stop++;
+	unlock(&(thread->box->check_stop));
+	return (NULL);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fun_time.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:39:56 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/19 19:39:58 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "header.h"
+
+long	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+void	ft_sleep(t_philo *pth, long end)
+{
+	long	start;
+
+	(void)pth;
+	start = get_time();
+	while ((get_time() - start < end))
+	{
+		ft_lock(&(pth->box->mutex_die));
+		if (pth->box->someone_die)
+		{
+			unlock(&(pth->box->mutex_die));
+			break ;
+		}
+		unlock(&(pth->box->mutex_die));
+		usleep(100);
+	}
+}
+
+void	ft_sleep_for_one(long end)
+{
+	long	start;
+
+	start = get_time();
+	while ((get_time() - start < end))
+	{
+		usleep(200);
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper_2_philo.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:39:54 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/19 21:37:51 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "header.h"
+
+void	mutex_init(t_mutex *ptr)
+{
+	pthread_mutex_init(ptr, NULL);
+}
+
+void	unlock(t_mutex *ptr)
+{
+	pthread_mutex_unlock(ptr);
+}
+
+void	ft_lock(t_mutex *ptr)
+{
+	pthread_mutex_lock(ptr);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper_philo.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:39:52 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/23 22:40:59 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "header.h"
+
+void	launch_philo(t_box *box, t_philo *thread)
+{
+	int	i;
+
+	i = 0;
+	while (i < box->number_of_philo)
+	{
+		thread[i].id = i + 1;
+		thread[i].box = box;
+		thread[i].l_fork = box->fork;
+		thread[i].r_fork = box->fork->next;
+		box->fork = box->fork->next;
+		thread[i].last_eat = box->start;
+		pthread_create(&thread[i].thread, NULL, thread_philo, &thread[i]);
+		i++;
+	}
+}
+
+int	f_25_line(t_box *box, int i)
+{
+	if (i == box->number_of_philo - 1)
+	{
+		ft_lock(&(box->check_stop));
+		if (box->stop)
+		{
+			unlock(&(box->check_stop));
+			return (1);
+		}
+		unlock(&(box->check_stop));
+	}
+	return (0);
+}
+
+void	wait_philo(t_box *box, t_philo *thread)
+{
+	int	i;
+
+	i = 0;
+	while (1)
+	{
+		if (f_25_line(box, i))
+			break ;
+		ft_lock(&(box->check_last));
+		if (get_time() - thread[i].last_eat >= box->time_to_die)
+		{
+			unlock(&(box->check_last));
+			ft_lock(&(box->mutex_die));
+			box->someone_die = 1;
+			unlock(&(box->mutex_die));
+			ft_lock(&(box->write));
+			printf("%ld %d died\n", get_time() - box->start, i + 1);
+			unlock(&(box->write));
+			break ;
+		}
+		unlock(&(box->check_last));
+		i++;
+		if (i > box->number_of_philo - 1)
+			i = 0;
+	}
+}
+
+void	free_all(t_box *box, t_philo *thread)
+{
+	int		i;
+	t_fork	*fork;
+
+	i = 0;
+	free(thread);
+	while (i < box->number_of_philo)
+	{
+		fork = box->fork->next;
+		pthread_mutex_destroy(&(box->fork->fork));
+		free(box->fork);
+		box->fork = fork;
+		i++;
+	}
+	pthread_mutex_destroy(&(box->check_stop));
+	pthread_mutex_destroy(&(box->check_last));
+	pthread_mutex_destroy(&(box->write));
+}
+
+int	check(t_box *box)
+{
+	ft_lock(&(box->mutex_die));
+	if (box->someone_die)
+	{
+		unlock(&(box->mutex_die));
+		return (0);
+	}
+	unlock(&(box->mutex_die));
+	return (1);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   one_philo.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:40:05 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/19 19:40:07 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "header.h"
+
+void	creat_one_philo(char **av)
+{
+	long	start;
+
+	start = get_time();
+	printf("%d %d  has taken a fork\n", 0, 1);
+	ft_sleep_for_one(ft_atoi(av[2]));
+	printf("%ld %d died\n", get_time() - start, 1);
+}
+
+int	for25line(t_box *box)
+{
+	ft_lock(&(box->mutex_die));
+	if (box->someone_die)
+	{
+		unlock(&(box->mutex_die));
+		return (1);
+	}
+	unlock(&(box->mutex_die));
+	return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_lib1.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:40:03 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/19 19:40:04 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "header.h"
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
+}
+
+long	ft_atoi(char *s)
+{
+	long	res;
+	int		i;
+
+	i = 0;
+	res = 0;
+	if (s[i] == '+')
+		i++;
+	while (s[i])
+	{
+		res = (res * 10) + s[i] - '0';
+		if (res > 2147483647)
+			return (21474836479);
+		i++;
+	}
+	if (!res)
+		return (21474836479);
+	return (res);
+}
+
+void	*ft_calloc(size_t nelem, size_t elsize)
+{
+	void	*ptr;
+
+	if (nelem == 0 || elsize == 0)
+	{
+		nelem = 1;
+		elsize = 1;
+	}
+	ptr = malloc(nelem * elsize);
+	if (ptr)
+		memset(ptr, 0, nelem * elsize);
+	return (ptr);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:40:08 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/19 19:40:12 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "header.h"
+
+int	main(int ac, char **av)
+{
+	if (ac == 6 || ac == 5)
+		run_philo(av);
+	else
+	{
+		write(2, "error:\n", 8);
+		write(2, "./philo", 8);
+		write(2, " number_of_philosophers", 24);
+		write(2, " time_to_die time_to_eat time_to_sleep", 39);
+		write(2, " [number_of_times_each_philosopher_must_eat]\n", 46);
+	}
+	return (0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_phil.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:40:13 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/19 19:40:18 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "header.h"
+
+void	run_philo(char **av)
+{
+	if (check_arg(av))
+		return ;
+	if (ft_atoi(av[1]) == 1)
+		creat_one_philo(av);
+	else
+		creat_philo(av);
+}
+
+#ifndef HEADER_H
+# define HEADER_H
+
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/time.h>
+# include <unistd.h>
+
+
+typedef pthread_mutex_t	t_mutex;
+
+typedef struct s_fork
+{
+	t_mutex				fork;
+	int					id;
+	struct s_fork		*next;
+}						t_fork;
+
+typedef struct s_box
+{
+	long				number_of_philo;
+	long				time_to_die;
+	long				time_to_eat;
+	long				time_to_sleep;
+	long				number_looping;
+	int					someone_die;
+	t_mutex				mutex_die;
+	t_mutex				write;
+	t_mutex				mutex_stop;
+	t_fork				*fork;
+	long				start;
+	long				stop;
+	t_mutex				check_stop;
+	t_mutex				check_last;
+}						t_box;
+
+typedef struct s_philo
+{
+	pthread_t			thread;
+	int					id;
+	t_box				*box;
+	long				last_eat;
+	t_fork				*l_fork;
+	t_fork				*r_fork;
+}						t_philo;
+
+
+void					creat_philo(char **av);
+int						ft_strlen(char *s);
+int						not_number(char *s);
+int						check_arg(char **av);
+void					run_philo(char **av);
+long					ft_atoi(char *s);
+void					*thread_philo(void *arg);
+void					*ft_calloc(size_t nelem, size_t elsize);
+void					creat_one_philo(char **av);
+void					launch_philo(t_box *box, t_philo *thread);
+void					wait_philo(t_box *box, t_philo *thread);
+void					free_all(t_box *box, t_philo *thread);
+int						for25line(t_box *box);
+int						check(t_box *box);
+void					unlock(t_mutex *ptr);
+void					ft_lock(t_mutex *ptr);
+void					mutex_init(t_mutex *ptr);
+long					get_time(void);
+void					ft_sleep(t_philo *pth, long end);
+void					ft_sleep_for_one(long end);
+#endif

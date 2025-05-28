@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper_philo.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/19 19:39:52 by machaq            #+#    #+#             */
+/*   Updated: 2025/03/23 22:40:59 by machaq           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "header.h"
 
@@ -44,7 +56,7 @@ void	wait_philo(t_box *box, t_philo *thread)
 		if (f_25_line(box, i))
 			break ;
 		ft_lock(&(box->check_last));
-		if (get_time() - thread[i].last_eat > box->time_to_die)
+		if (get_time() - thread[i].last_eat >= box->time_to_die)
 		{
 			unlock(&(box->check_last));
 			ft_lock(&(box->mutex_die));

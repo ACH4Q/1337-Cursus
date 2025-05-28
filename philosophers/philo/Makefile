@@ -1,16 +1,7 @@
 CC = cc
 CFLAG = -Wall -Wextra -Werror  -fsanitize=thread
 
-FILE = ckeck_arg.c \
-		philo.c \
-		run_phil.c \
-		creat_philo.c\
-		mini_lib1.c\
-		function_philo.c\
-		fun_needed.c\
-		fun_time.c\
-		one_philo.c\
-		fun_help.c
+FILE = $(wildcard *.c)
 
 NAME = philo
 OBJ = $(FILE:.c=.o)
